@@ -1,0 +1,455 @@
+RESUMO DE PROPRIEDADES BÁSICAS DE ÁLGEBRA
+
+---------------------------------------------
+GUIA DOS BLOCOS E SUBSEÇÕES
+---------------------------------------------
+
+Bloco 1 - Operações e ordem de resolução
+01.01 Parênteses, colchetes e chaves
+01.02 Potências e raízes
+01.03 Multiplicações e divisões
+01.04 Adições e subtrações
+
+Bloco 2 - Propriedades da soma e da subtração
+02.01 Comutativa
+02.02 Associativa
+02.03 Elemento neutro
+02.04 Oposto
+02.05 Subtração como soma do oposto
+
+Bloco 3 - Propriedades da multiplicação e da divisão
+03.01 Comutativa
+03.02 Associativa
+03.03 Distributiva
+03.04 Elemento neutro
+03.05 Elemento nulo
+03.06 Exemplo de aplicação
+
+Bloco 4 - Termos algébricos e redução
+04.01 Termos semelhantes
+04.02 Redução de termos
+04.03 Constantes
+04.04 Termos que não são semelhantes
+04.05 Fatores unitários
+04.06 Fatores nulos
+
+Bloco 5 - Produtos notáveis
+05.01 Quadrado da soma
+05.02 Quadrado da diferença
+05.03 Soma pela diferença
+
+Bloco 6 - Fatoração
+06.01 Fator comum
+06.02 Diferença de quadrados
+06.03 Fatoração por agrupamento
+
+Bloco 7 - Potências
+07.01 Produto e quociente de potências
+07.02 Potência de potência
+07.03 Potência de um produto
+07.04 Potência de um quociente
+07.05 Expoente zero
+07.06 Expoente negativo
+07.07 Expoente fracionário
+
+Bloco 8 - Raízes
+08.01 Conversão entre raízes e potências
+08.02 Produto de raízes
+08.03 Quociente de raízes
+
+Bloco 9 - Frações
+09.01 Frações equivalentes
+09.02 Simplificação
+09.03 Soma com denominadores iguais
+09.04 Subtração com denominadores iguais
+09.05 Soma com denominadores diferentes
+09.06 Subtração com denominadores diferentes
+09.07 Multiplicação
+09.08 Divisão
+
+Bloco 10 - Frações aninhadas
+10.01 Simplificação de uma fração interna
+Ensina a resolver primeiro a fração mais interna.
+10.02 Inversão da fração externa
+Ensina a transformar a divisão pelo resultado interno em multiplicação pelo inverso.
+
+Bloco 11 - Equações do primeiro grau
+Ensina como isolar uma incógnita em uma equação linear.
+11.01 Isolamento da incógnita
+
+Bloco 12 - Equações do segundo grau
+Apresenta a forma geral, o discriminante e a fórmula de Bhaskara.
+12.01 Forma geral
+12.02 Discriminante
+12.03 Fórmula de Bhaskara
+
+Bloco 13 - Funções e composição
+Ensina como funções transformam entradas em saídas e como funções podem ser combinadas.
+13.01 Função
+13.02 Composição
+13.03 Relação com a regra da cadeia
+
+Bloco 14 - Logaritmos
+Explica como os logaritmos desfazem potências e transformam operações.
+14.01 Definição
+14.02 Produto
+14.03 Quociente
+14.04 Potência
+14.05 Logaritmo natural
+
+Bloco 15 - Regras usadas como base para derivadas
+15.01 Soma
+15.02 Subtração
+15.03 Produto
+15.04 Quociente
+15.05 Potência
+15.06 Regra da cadeia
+
+Bloco 16 - Roteiro para simplificar uma expressão
+16.01 Parênteses, potências e raízes
+16.02 Denominadores comuns
+16.03 Inverso de uma fração
+16.04 Distribuição de fatores
+16.05 Redução de termos semelhantes
+16.06 Cancelamento de fatores
+16.07 Preparação para derivar
+
+---------------------------------------------
+
+Este material reúne as propriedades de Matemática do Ensino Fundamental e
+Médio usadas antes ou durante o estudo de derivadas em Cálculo 1.
+
+---------------------------------------------
+1. OPERAÇÕES E ORDEM DE RESOLUÇÃO
+---------------------------------------------
+Explica como ler uma expressão e seguir a sequência correta de cálculos.
+
+01 Parênteses, colchetes e chaves.
+02 Potências e raízes.
+03 Multiplicações e divisões, da esquerda para a direita.
+04 Adições e subtrações, da esquerda para a direita.
+
+Exemplo:
+    2 + 3 * 4 = 2 + 12 = 14
+    (2 + 3) * 4 = 5 * 4 = 20
+
+---------------------------------------------
+2. PROPRIEDADES DA SOMA E DA SUBTRAÇÃO
+---------------------------------------------
+Explica como a soma e a subtração podem ser reorganizadas ou desfeitas.
+
+01 Comutativa:
+    a + b = b + a
+
+02 Associativa:
+    (a + b) + c = a + (b + c)
+
+03 Elemento neutro:
+    a + 0 = a
+
+04 Oposto:
+    a + (-a) = 0
+
+05 Subtração como soma do oposto:
+    a - b = a + (-b)
+
+---------------------------------------------
+3. PROPRIEDADES DA MULTIPLICAÇÃO E DA DIVISÃO
+---------------------------------------------
+Explica como produtos e divisões são organizados e simplificados.
+
+01 Comutativa:
+    a * b = b * a
+
+02 Associativa:
+    (a * b) * c = a * (b * c)
+
+03 Distributiva:
+    a * (b + c) = a*b + a*c
+    a * (b - c) = a*b - a*c
+
+04 Elemento neutro:
+    a * 1 = a
+
+05 Elemento nulo:
+    a * 0 = 0
+
+06 Exemplo de aplicação:
+    3*(x + 2) = 3x + 6
+
+---------------------------------------------
+4. TERMOS ALGÉBRICOS E REDUÇÃO
+---------------------------------------------
+Explica como reconhecer termos semelhantes e reduzir uma expressão algébrica.
+
+01 Termos semelhantes:
+
+02 Redução de termos:
+    3x + 5x = 8x
+    7x² - 2x² = 5x²
+
+03 Constantes:
+    4 + 9 = 13
+
+04 Termos que não são semelhantes:
+    x e x²
+    2x e 2y
+
+05 Fatores unitários:
+    1*x = x
+    x*1 = x
+
+06 Fatores nulos:
+    0*x = 0
+    x*0 = 0
+
+---------------------------------------------
+5. PRODUTOS NOTÁVEIS
+---------------------------------------------
+Apresenta identidades que facilitam o desenvolvimento de produtos algébricos.
+
+01 Quadrado da soma:
+    (a + b)² = a² + 2ab + b²
+
+02 Quadrado da diferença:
+    (a - b)² = a² - 2ab + b²
+
+03 Produto da soma pela diferença:
+    (a + b)(a - b) = a² - b²
+
+---------------------------------------------
+6. FATORAÇÃO
+---------------------------------------------
+Explica como transformar uma soma ou diferença em uma multiplicação de fatores.
+
+01 Fator comum:
+    ax + ay = a(x + y)
+
+02 Diferença de quadrados:
+    a² - b² = (a - b)(a + b)
+
+03 Fatoração por agrupamento:
+    ax + ay + bx + by
+    = a(x + y) + b(x + y)
+    = (a + b)(x + y)
+
+---------------------------------------------
+7. POTÊNCIAS
+---------------------------------------------
+Apresenta as regras para operar bases e expoentes.
+
+01 Produto de potências de mesma base:
+    a^m * a^n = a^(m+n)
+
+02 Quociente de potências de mesma base:
+    a^m / a^n = a^(m-n), com a diferente de 0
+
+03 Potência de potência:
+    (a^m)^n = a^(m*n)
+
+04 Potência de um produto:
+    (ab)^n = a^n*b^n
+
+05 Potência de um quociente:
+    (a/b)^n = a^n/b^n, com b diferente de 0
+
+06 Expoente zero:
+    a^0 = 1, com a diferente de 0
+
+07 Expoente negativo:
+    a^(-n) = 1/a^n
+
+08 Expoente fracionário:
+    a^(1/n) = raiz_n(a)
+    a^(m/n) = raiz_n(a^m)
+
+08 Exemplo de expoente fracionário:
+    x^(2/3) = raiz_cubica(x²)
+
+---------------------------------------------
+8. RAÍZES
+---------------------------------------------
+Explica o significado das raízes e sua relação com os expoentes fracionários.
+
+01 Conversão entre raízes e potências:
+    raiz(a) = a^(1/2)
+    raiz_cubica(a) = a^(1/3)
+
+02 Produto de raízes:
+    raiz(a)*raiz(b) = raiz(ab)
+
+03 Quociente de raízes:
+    raiz(a)/raiz(b) = raiz(a/b), quando b não é zero
+
+---------------------------------------------
+9. FRAÇÕES
+---------------------------------------------
+Ensina como manter denominadores, fazer operações e simplificar frações.
+
+01 Frações equivalentes:
+    a/b = (a*k)/(b*k), com k diferente de 0
+
+02 Simplificação:
+    (a*k)/(b*k) = a/b
+
+03 Soma com denominadores iguais:
+    a/c + b/c = (a + b)/c
+
+04 Subtração com denominadores iguais:
+    a/c - b/c = (a - b)/c
+
+05 Soma com denominadores diferentes:
+    a/b + c/d = (a*d + c*b)/(b*d)
+
+06 Subtração com denominadores diferentes:
+    a/b - c/d = (a*d - c*b)/(b*d)
+
+07 Multiplicação:
+    (a/b)*(c/d) = (a*c)/(b*d)
+
+08 Divisão:
+    (a/b)/(c/d) = (a/b)*(d/c) = (a*d)/(b*c)
+
+08 Regra importante:
+    dividir por uma fração é multiplicar pelo seu inverso.
+
+08 Exemplo:
+    1/(2/3) = 1*(3/2) = 3/2
+
+---------------------------------------------
+10. FRAÇÕES ANINHADAS
+---------------------------------------------
+Mostra como resolver frações que aparecem dentro de outras frações.
+
+01 Simplificação de uma fração interna:
+
+    1/(1 + 1/(x + 1))
+
+01 Primeiro simplifique o denominador:
+
+    1 + 1/(x + 1)
+    = (x + 1)/(x + 1) + 1/(x + 1)
+    = (x + 2)/(x + 1)
+
+02 Depois use o inverso:
+
+    1/((x + 2)/(x + 1))
+    = (x + 1)/(x + 2)
+
+02 Para a questão:
+
+    1/(1 + 1/(1 + 1/(x + 1)))
+
+01 A fração mais interna fica:
+
+    1 + 1/(x + 1) = (x + 2)/(x + 1)
+
+02 Então:
+
+    1/(1 + (x + 1)/(x + 2))
+    = 1/((2x + 3)/(x + 2))
+    = (x + 2)/(2x + 3)
+
+---------------------------------------------
+11. EQUAÇÕES DO PRIMEIRO GRAU
+---------------------------------------------
+Ensina como isolar uma incógnita em uma equação linear.
+
+01 Regra: faça a mesma operação nos dois lados.
+
+    2x + 3 = 11
+    2x = 8
+    x = 4
+
+---------------------------------------------
+12. EQUAÇÕES DO SEGUNDO GRAU
+---------------------------------------------
+Apresenta a forma geral, o discriminante e a fórmula para encontrar as raízes.
+
+01 Forma geral:
+    ax² + bx + c = 0
+
+02 Discriminante:
+    Delta = b² - 4ac
+
+03 Fórmula de Bhaskara:
+    x = (-b +- raiz(Delta))/(2a)
+
+---------------------------------------------
+13. FUNÇÕES E COMPOSIÇÃO
+---------------------------------------------
+Ensina os fundamentos e o funcionamento de funções e de funções dentro de funções.
+
+01 Uma função associa uma entrada a uma saída:
+    f(x) = x² + 1
+
+02 Composição:
+    (f o g)(x) = f(g(x))
+
+02 Exemplo:
+    f(u) = sin(u)
+    g(x) = x²
+    f(g(x)) = sin(x²)
+
+03 Essa estrutura aparece na regra da cadeia:
+    (f(g(x)))' = f'(g(x))*g'(x)
+
+---------------------------------------------
+14. LOGARITMOS
+---------------------------------------------
+Explica como os logaritmos desfazem potências e transformam operações.
+
+01 Definição:
+    log_a(b) = c  se, e somente se, a^c = b
+
+02 Produto:
+    log_a(x*y) = log_a(x) + log_a(y)
+
+03 Quociente:
+    log_a(x/y) = log_a(x) - log_a(y)
+
+04 Potência:
+    log_a(x^r) = r*log_a(x)
+
+05 Logaritmo natural:
+    ln(x) = log_e(x)
+
+---------------------------------------------
+15. REGRAS USADAS COMO BASE PARA DERIVADAS
+---------------------------------------------
+Reúne as regras algébricas e de derivação que serão usadas no Cálculo 1.
+
+01 Soma:
+    (u + v)' = u' + v'
+
+02 Subtração:
+    (u - v)' = u' - v'
+
+03 Produto:
+    (u*v)' = u'*v + u*v'
+
+04 Quociente:
+    (u/v)' = (u'*v - u*v')/v²
+
+05 Potência:
+    (u^n)' = n*u^(n-1)*u'
+
+06 Regra da cadeia:
+    (f(g(x)))' = f'(g(x))*g'(x)
+
+---------------------------------------------
+16. ROTEIRO PARA SIMPLIFICAR UMA EXPRESSÃO
+---------------------------------------------
+Mostra uma sequência prática para organizar uma expressão antes de derivá-la.
+
+01 Resolva primeiro parênteses, potências e raízes.
+02 Procure denominadores comuns nas frações.
+03 Transforme divisão por fração em multiplicação pelo inverso.
+04 Distribua fatores quando necessário.
+05 Reduza termos semelhantes.
+06 Cancele apenas fatores iguais em numerador e denominador.
+07 Só depois aplique as regras de derivação.
+
+Observação:
+Nunca se deve cancelar termos que estão somando ou subtraindo. O
+cancelamento é feito entre fatores multiplicando o numerador e o denominador.

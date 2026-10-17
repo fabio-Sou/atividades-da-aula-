@@ -1,0 +1,211 @@
+RESUMO DE DERIVADAS
+
+---------------------------------------------
+GUIA DOS BLOCOS E SUBSEÇÕES
+---------------------------------------------
+
+Bloco 1 - Guia das principais regras
+01.01 Produto
+01.02 Quociente
+01.03 Regra da cadeia
+01.04 Potência (expoente constante)
+01.05 Potência (expoente função)
+01.06 Exponencial (base e)
+01.07 Logaritmo natural
+
+Bloco 2 - Kit Básico de Derivadas
+02.01 Polinômios
+02.02 Produto
+02.03 Quociente
+02.04 Regra da cadeia
+02.05 Potência (expoente constante)
+02.06 Potência (expoente função)
+02.07 Exponenciais (base e)
+02.08 Exponenciais (base a)
+02.09 Logaritmos
+
+Bloco 3 - Derivadas trigonométricas
+03.01 Seno
+03.02 Cosseno
+03.03 Tangente
+03.04 Cotangente
+03.05 Secante
+03.06 Cossecante
+
+Bloco 4 - Derivadas hiperbólicas
+04.01 Seno hiperbólico (sinh)
+04.02 Cosseno hiperbólico (cosh)
+04.03 Tangente hiperbólica (tanh)
+04.04 Cotangente hiperbólica (coth)
+04.05 Secante hiperbólica (sech)
+04.06 Cossecante hiperbólica (csch)
+
+Bloco 5 - Kit Básico de Derivadas Trigonométricas e Hiperbólicas
+05.01 Seno
+05.02 Cosseno
+05.03 Tangente
+05.04 Cotangente
+05.05 Secante
+05.06 Cossecante
+
+Bloco 6 - Derivadas trigonométricas (repetição organizada)
+06.01 Seno
+06.02 Cosseno
+06.03 Tangente
+06.04 Cotangente
+06.05 Secante
+06.06 Cossecante
+
+Bloco 7 - Funções hiperbólicas (definições)
+07.01 Seno hiperbólico
+07.02 Cosseno hiperbólico
+07.03 Tangente hiperbólica
+07.04 Cotangente hiperbólica
+07.05 Secante hiperbólica
+07.06 Cossecante hiperbólica
+
+Bloco 8 - Derivadas hiperbólicas
+08.01 Seno hiperbólico
+08.02 Cosseno hiperbólico
+08.03 Tangente hiperbólica
+08.04 Cotangente hiperbólica
+08.05 Secante hiperbólica
+08.06 Cossecante hiperbólica
+
+---------------------------------------------
+
+1. GUIA DAS PRINCIPAIS REGRAS (O "KIT BÁSICO")
+
+01. Produto: (uv)' = u'v + uv'
+
+02. Quociente: (u/v)' = (u'v - uv')/v²
+
+03. Regra da cadeia: (f(g(x)))' = f'(g(x)) · g'(x)
+
+04. Potência (expoente constante): (uⁿ)' = n·uⁿ⁻¹·u'
+
+05. Potência (expoente função): (uᵛ)' = uᵛ · (v' ln u + v·u'/u)
+
+06. Exponencial: (eᵘ)' = eᵘ·u'
+
+07. Logaritmo natural: (ln u)' = u'/u
+
+---------------------------------------------
+
+2. KIT BÁSICO DE DERIVADAS
+
+01. Polinômios: (xⁿ)' = n·xⁿ⁻¹
+
+02. Produto: (u·v)' = u'v + uv'
+
+03. Quociente: (u/v)' = (u'v - uv')/v²
+
+04. Regra da cadeia: (f(g(x)))' = f'(g(x)) · g'(x)
+
+05. Potência (expoente constante): (uⁿ)' = n·uⁿ⁻¹·u'
+
+06. Potência (expoente função): (uᵛ)' = uᵛ · (v' ln u + v·u'/u)
+
+07. Exponenciais (base e): (eᵘ)' = eᵘ·u'
+
+08. Exponenciais (base a): (aᵘ)' = aᵘ·ln(a)·u'
+
+09. Logaritmos: (ln u)' = u'/u; (logₐ u)' = u'/(u·ln a)
+
+---------------------------------------------
+
+3. DERIVADAS TRIGONOMÉTRICAS
+
+01. (sin u)' = cos u·u'
+
+02. (cos u)' = -sin u·u'
+
+03. (tan u)' = sec² u·u'
+
+04. (cot u)' = -csc² u·u'
+
+05. (sec u)' = sec u·tan u·u'
+
+06. (csc u)' = -csc u·cot u·u'
+
+---------------------------------------------
+
+4. DERIVADAS HIPERBÓLICAS
+
+01. (sinh u)' = cosh u·u'
+
+02. (cosh u)' = sinh u·u'
+
+03. (tanh u)' = sech² u·u'
+
+04. (coth u)' = -csch² u·u'
+
+05. (sech u)' = -sech u·tanh u·u'
+
+06. (csch u)' = -csch u·coth u·u'
+
+---------------------------------------------
+
+5. KIT BÁSICO DE DERIVADAS TRIGONOMÉTRICAS E HIPERBÓLICAS
+
+FUNÇÕES TRIGONOMÉTRICAS
+
+01. Seno: sin u
+
+02. Cosseno: cos u
+
+03. Tangente: tan u = sin u/cos u
+
+04. Cotangente: cot u = cos u/sin u
+
+05. Secante: sec u = 1/cos u
+
+06. Cossecante: csc u = 1/sin u
+
+---------------------------------------------
+
+6. DERIVADAS TRIGONOMÉTRICAS
+
+01. (sin u)' = cos u·u'
+
+02. (cos u)' = -sin u·u'
+
+03. (tan u)' = sec² u·u'
+
+04. (cot u)' = -csc² u·u'
+
+05. (sec u)' = sec u·tan u·u'
+
+06. (csc u)' = -csc u·cot u·u'
+
+---------------------------------------------
+
+7. FUNÇÕES HIPERBÓLICAS
+
+01. Seno hiperbólico: sinh u = (eᵘ - e⁻ᵘ)/2
+
+02. Cosseno hiperbólico: cosh u = (eᵘ + e⁻ᵘ)/2
+
+03. Tangente hiperbólica: tanh u = sinh u/cosh u
+
+04. Cotangente hiperbólica: coth u = cosh u/sinh u
+
+05. Secante hiperbólica: sech u = 1/cosh u
+
+06. Cossecante hiperbólica: csch u = 1/sinh u
+
+---------------------------------------------
+
+8. DERIVADAS HIPERBÓLICAS
+
+01. (sinh u)' = cosh u·u'
+
+02. (cosh u)' = sinh u·u'
+
+03. (tanh u)' = sech² u·u'
+
+04. (coth u)' = -csch² u·u'
+
+05. (sech u)' = -sech u·tanh u·u'
+
+06. (csch u)' = -csch u·coth u·u'
