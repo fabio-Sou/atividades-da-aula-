@@ -72,6 +72,10 @@ Bloco 8 - Derivadas hiperbólicas
 08.05 Secante hiperbólica
 08.06 Cossecante hiperbólica
 
+Bloco 9 - Extensões usadas pelo tutor
+09.01 Arco-tangente
+09.02 Raízes de índice constante
+
 ---------------------------------------------
 
 1. GUIA DAS PRINCIPAIS REGRAS (O "KIT BÁSICO")
@@ -143,6 +147,19 @@ Bloco 8 - Derivadas hiperbólicas
 05. (sech u)' = -sech u·tanh u·u'
 
 06. (csch u)' = -csch u·coth u·u'
+
+---------------------------------------------
+
+9. EXTENSÕES USADAS PELO TUTOR
+
+Estas regras complementam o guia para expressões com funções inversas e
+raízes de índice constante.
+
+01. Arco-tangente:
+    (arctan u)' = u'/(1 + u²)
+
+02. Raiz de índice n:
+    (raiz_n(u))' = u'/(n·raiz_n(u)^(n-1))
 
 ---------------------------------------------
 

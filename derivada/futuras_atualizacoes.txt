@@ -1,0 +1,10 @@
+FUTURAS ATUALIZAÇÕES DO TUTOR DE DERIVADAS
+===========================================
+
+Estas expressões têm sintaxe reconhecida, mas ainda precisam de uma regra ou implementação específica.
+
+Data: 2026-10-18T02:51:34
+Expressão: unknown(x)
+Motivo: A função 'unknown' ainda não está no tutor.
+Status: aguardando implementação
+

@@ -1,0 +1,68 @@
+COMANDOS ACEITOS PELO TUTOR DE DERIVADAS
+
+O programa recebe uma expressão matemática e usa x como variável de derivação.
+Use parênteses para deixar a estrutura da expressão clara.
+
+OPERADORES
+  soma:                 +
+  subtração:            -
+  multiplicação:        *
+  divisão:              /
+  potência:             ^
+
+FUNÇÕES
+  seno:                 sin(x)
+  cosseno:              cos(x)
+  tangente:             tan(x)
+  cotangente:           cot(x)
+  secante:              sec(x)
+  cossecante:           csc(x)
+  arco-tangente:        arctan(x)
+  exponencial:          exp(x) ou e^x
+  logaritmo natural:    ln(x)
+  logaritmo base 3:     log3(x)
+  raiz quadrada:        sqrt(x) ou raiz quadrada de (x)
+  raiz cúbica:           root3(x) ou raiz cúbica de (x)
+  raiz quinta:           root5(x) ou raiz quinta de (x)
+
+POTÊNCIAS COM EXPOENTE VARIÁVEL
+  x^x
+  x^(exp(x))
+  (x^2+1)^(sin(x))
+
+LETRAS CONSTANTES
+  Letras diferentes de x são tratadas como constantes:
+  a + x^2
+  M^H + H^M
+
+EXEMPLOS COMPLETOS
+  sin(x^2)
+  log3(sin(x^2))
+  raiz quinta de ((x^2-3*x^2)^2)
+  x^(exp(ln(1/x))) + 1/sin(1/x)
+  cos(arctan(x))/(x^2-x^7)
+
+COMANDOS DO PROGRAMA
+  ajuda       Mostra esta lista no modo interativo.
+  comandos    Mostra esta lista no modo interativo.
+  imagem      Abre o modo para derivadas com figuras/símbolos dependentes de x.
+  guia        Mostra o guia dos blocos de álgebra.
+  bloco 6    Mostra apenas o bloco 6.
+  lista       Lista as regras do resumo de derivadas.
+  sair        Fecha o programa.
+
+DERIVADA DE IMAGEM
+  Use esse modo quando figuras como bola, triângulo ou pastel representam
+  funções que dependem de x. Ele aceita:
+
+  1. Forma explícita:
+     bola(x)^triangulo(x)
+
+  2. Símbolos declarados pelo contexto da questão:
+     M^H
+
+  3. Nomes de figuras tratados automaticamente como funções:
+     bola^triangulo
+
+  Para uma potência de funções, o tutor aplica:
+     (u^v)' = u^v * (v'*ln(u) + v*u'/u)

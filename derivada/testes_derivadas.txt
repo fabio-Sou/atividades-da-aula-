@@ -1,0 +1,401 @@
+TESTES DO TUTOR DE DERIVADAS
+============================
+
+Este arquivo reúne as expressões usadas para testar o programa
+guia_derivadas.py. As expressões estão na sintaxe aceita pelo terminal.
+
+Para executar um teste, abra o terminal dentro da pasta derivada e use:
+
+    python guia_derivadas.py --resolver "EXPRESSAO"
+
+Durante cada teste, responda S ou N quando o programa perguntar se deseja
+ver a fórmula da regra aplicada.
+
+
+1. TESTES PRINCIPAIS
+--------------------
+
+01. Produto de funções trigonométricas:
+
+    sin(2*x)/cos(2*x)*tan(2*x)
+
+Regras esperadas: quociente, produto e regra da cadeia.
+
+
+02. Potência com expoente variável e função recíproca:
+
+    x^(exp(ln(1/x))) + 1/sin(1/x)
+
+Regras esperadas: potência com expoente função, exponencial, logaritmo,
+regra da cadeia e quociente.
+
+
+03. Logaritmo natural de uma composição:
+
+    ln(cos(sqrt(t^2-3*t)))
+
+Observação: o programa converte t para x.
+
+Regras esperadas: logaritmo, cosseno, raiz e regra da cadeia.
+
+
+04. Logaritmo de base constante:
+
+    log3(sin(x^2))
+
+Regra esperada: logaritmo em base constante e regra da cadeia.
+
+
+05. Produto de símbolos tratados como constantes:
+
+    ln(x*square*triangle*circle)
+
+No modo normal, square, triangle e circle têm derivada zero.
+
+
+06. Quociente com arco-tangente:
+
+    cos(arctan(x))/(x^2-x^7)
+
+Regras esperadas: quociente, cosseno, arco-tangente e regra da cadeia.
+
+
+07. Potências de símbolos dependentes de x:
+
+    M^H + H^M
+
+Este teste deve ser executado no modo Derivada de imagem.
+
+
+08. Exponencial com raiz cúbica:
+
+    exp(root3(x^5-x^7))
+
+Regras esperadas: exponencial, raiz de índice 3 e regra da cadeia.
+
+
+09. Constante, potência e secante:
+
+    a + 2^tan(x) + sec(tan(x))
+
+No modo normal, a é constante.
+
+
+10. Tangente de logaritmo com raiz quinta:
+
+    tan(ln(root5((x^2-3*x^2)^2)))
+
+Regras esperadas: tangente, logaritmo, raiz de índice 5 e cadeia.
+
+
+11. Arco-tangente de tangente:
+
+    arctan(tan(x)+1)
+
+Regra esperada: arco-tangente e regra da cadeia.
+
+
+12. Soma de arco-tangente e potência de base constante:
+
+    arctan(tan(x)^2) + 3^ln(sin(2*x))
+
+Regras esperadas: arco-tangente, potência de base constante, logaritmo
+e regra da cadeia.
+
+
+13. Logaritmo de raiz quadrada:
+
+    ln(sqrt(x))
+
+Resultado esperado após simplificação: 1/(2*x).
+
+
+14. Arco-tangente de raiz e tangente:
+
+    arctan(sqrt(tan(sqrt(x))))
+
+Regras esperadas: arco-tangente, raiz quadrada, tangente e cadeia.
+
+
+15. Potência com expoente secante:
+
+    ln(x)^sec(x)
+
+Regra esperada: potência com expoente função.
+
+
+16. Potência aninhada:
+
+    x^(x^x) + 1/x
+
+Regras esperadas: potência com expoente função e derivada de recíproco.
+
+
+17. Identidade trigonométrica:
+
+    cos(tan(sin(x)))^2 + sin(tan(sin(x)))^2
+
+Este caso é útil para comparar a derivação estrutural com uma futura
+simplificação por identidade trigonométrica.
+
+
+18. Três logaritmos encadeados:
+
+    ln(ln(ln(x^2+1)))
+
+Regras esperadas: três aplicações da regra da cadeia e logaritmo.
+
+
+19. Produto trigonométrico completo:
+
+    sin(x)*cos(x)*tan(x)*cot(x)*sec(x)*csc(x)*x^2
+
+Este teste possui duas formas:
+
+Forma completa:
+    aplicar várias vezes a regra do produto.
+
+Forma curta:
+    sin(x)*csc(x) = 1
+    cos(x)*sec(x) = 1
+    tan(x)*cot(x) = 1
+    sobra x^2
+    (x^2)' = 2x
+
+O programa deve perguntar se o usuário deseja usar o atalho trigonométrico.
+
+
+2. TESTES DE DERIVADA DE IMAGEM
+-------------------------------
+
+Use a opção 5 do menu inicial ou o comando:
+
+    python guia_derivadas.py --interativo
+
+Depois escolha a opção de derivada de imagem.
+
+
+20. Símbolos simples:
+
+    bola^triangulo
+
+Resultado esperado:
+
+    bola^triangulo * (triangulo'*ln(bola) + triangulo*bola'/bola)
+
+
+21. Símbolos com nomes compostos:
+
+    ovo_frito^frigideira
+
+Resultado esperado:
+
+    ovo_frito^frigideira *
+    (frigideira'*ln(ovo_frito) + frigideira*ovo_frito'/ovo_frito)
+
+
+22. Símbolos escritos como funções:
+
+    bola(x)^triangulo(x)
+
+Este formato deixa explícito que os dois símbolos dependem de x.
+
+
+23. Soma de potências de imagem:
+
+    M^H + H^M
+
+As derivadas esperadas devem conter M' e H'.
+
+
+3. TESTES DE POTÊNCIAS E RAÍZES
+--------------------------------
+
+24. Potência com expoente constante:
+
+    (x^2+1)^3
+
+
+25. Potência com expoente fracionário:
+
+    (3*x^2+6*x-1)^(2/3)
+
+
+26. Potência com expoente variável:
+
+    (x+1)^(sin(x))
+
+
+27. Raiz quadrada:
+
+    sqrt(3*x+1)
+
+
+28. Raiz cúbica:
+
+    root3(x^5-x^7)
+
+
+29. Raiz quinta:
+
+    root5((x^2-3*x^2)^2)
+
+
+30. Forma em português:
+
+    raiz quinta de ((x^2-3*x^2)^2)
+
+
+4. TESTES DE LOGARITMOS E EXPONENCIAIS
+---------------------------------------
+
+31. Exponencial simples:
+
+    exp(x^2+3*x)
+
+
+32. Exponencial escrita com e:
+
+    e^(x^2+3*x)
+
+
+33. Logaritmo natural:
+
+    ln(x^2+1)
+
+
+34. Logaritmo de base 2:
+
+    log2(x^2+1)
+
+
+35. Logaritmo de base 10:
+
+    log10(sin(x))
+
+
+36. Forma em português:
+
+    seno(x^2)
+
+
+5. TESTES DE SIMPLIFICAÇÃO ALGÉBRICA
+-------------------------------------
+
+37. Combinação de potências:
+
+    x^5*x
+
+Resultado esperado: x^6.
+
+
+38. Soma de expoentes:
+
+    x^2*x^3
+
+Resultado esperado: x^5.
+
+
+39. Coeficientes e potências:
+
+    2*x*3*x^2
+
+Resultado esperado: 6*x^3.
+
+
+40. Recíproco transformado em expoente:
+
+    (1/x)*x^(1/2)
+
+Resultado esperado: x^(-1/2).
+
+
+41. Produto de raízes iguais:
+
+    sqrt(x)*sqrt(x)
+
+Resultado esperado: x.
+
+
+42. Fração aninhada:
+
+    1/(1+1/(1+1/(x+1)))
+
+Este caso testa a redução algébrica antes da derivada.
+
+
+6. TESTE DE ENTRADAS INVÁLIDAS
+--------------------------------
+
+Use estes casos para confirmar se o programa informa o erro claramente:
+
+    unknown(x)
+    root0(x)
+    root(x)
+    log(x)
+    2**
+
+O programa não deve produzir um resultado falso. Ele deve informar que não
+conseguiu interpretar a expressão e indicar exemplos válidos.
+
+
+7. TESTE RÁPIDO AUTOMÁTICO
+---------------------------
+
+Para testar somente se as expressões principais são aceitas, use:
+
+    python guia_derivadas.py --resolver "log3(sin(x^2))"
+    python guia_derivadas.py --resolver "root3(x^5-x^7)"
+    python guia_derivadas.py --resolver "ln(sqrt(x))"
+
+Para verificar a questão 19 e escolher a resolução curta ou longa, use:
+
+    python guia_derivadas.py --resolver "sin(x)*cos(x)*tan(x)*cot(x)*sec(x)*csc(x)*x^2"
+
+Para consultar a sintaxe completa das entradas:
+
+    python guia_derivadas.py --comandos
+
+
+8. NOVAS QUESTÕES ADICIONADAS
+------------------------------
+
+43. Produto de dois polinômios:
+
+    (7*x^2+6*x)*(3*x-1)
+
+
+44. Soma de polinômio e raiz:
+
+    7*x^2+sqrt(3*x+1)
+
+
+45. Exponencial aninhada:
+
+    exp(exp(exp(x^2)))
+
+
+46. Exponencial com raiz e potência de base e:
+
+    exp(sqrt(x))+x^e
+
+
+47. Soma de funções trigonométricas compostas:
+
+    sin(cos(x^2))
+
+
+48. Produto de polinômio e exponencial:
+
+    x^2*exp(x)
+
+
+49. Quociente entre potência e logaritmo:
+
+    x^3/ln(x)
+
+
+50. Quociente com exponencial composta e logaritmo:
+
+    (x^2*exp(sin(x)))/ln(x^3+1)
+
