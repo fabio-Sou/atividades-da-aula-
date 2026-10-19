@@ -303,6 +303,13 @@ def limpar_tela() -> None:
         os.system("cls" if os.name == "nt" else "clear")
 
 
+def aguardar_retorno(mensagem: str = "Pressione Enter para voltar ao menu...") -> None:
+    try:
+        input(f"\n{mensagem}")
+    except (EOFError, KeyboardInterrupt):
+        print()
+
+
 def remover_acentos(texto: str) -> str:
     return "".join(
         caractere
@@ -2022,13 +2029,19 @@ def menu_tutor_completo() -> None:
             menu_derivada_de_imagem()
         elif escolha == "3":
             try:
-                ordem = int(input("Qual ordem deseja calcular?\n> ").strip())
-                expressao = input("Digite a função:\n> ").strip()
+                ordem = int(
+                    input(
+                        "Qual ordem deseja calcular? (ex.: 2 para a segunda derivada)\n> "
+                    ).strip()
+                )
+                expressao = input("Digite a função (ex.: x^2):\n> ").strip()
             except (EOFError, KeyboardInterrupt, ValueError):
-                print("Ordem inválida.")
+                print("Ordem inválida: digite um número inteiro, como 2 ou 3.")
+                aguardar_retorno()
                 continue
             if expressao:
                 resolver_ordem_superior(expressao, ordem)
+                aguardar_retorno()
         elif escolha == "4":
             return
         else:
@@ -2126,6 +2139,7 @@ def menu_derivada_de_imagem() -> None:
         return
     if expressao:
         resolver(expressao, derivada_de_imagem=True)
+        aguardar_retorno()
 
 
 def main() -> int:

@@ -91,6 +91,11 @@ Nesse modo nenhuma limpeza automática é feita, permitindo acompanhar todo o
 histórico do terminal e investigar possíveis erros. Digite `desenvolvedor`
 novamente na tela inicial para desativá-lo.
 
+As opções **Derivada de imagem** e **Derivada de ordem superior** do Tutor
+completo mantêm o resultado visível até você pressionar Enter. Para derivada
+de ordem superior, informe primeiro um número inteiro para a ordem (por
+exemplo, `2`) e depois a função (por exemplo, `x^2`).
+
 Depois que todas as regras são aplicadas, o tutor mostra o resultado obtido.
 Se ainda existir uma redução algébrica segura, ele avisa que a expressão pode
 ser simplificada e pergunta se você quer ver cada transformação. Assim, a
