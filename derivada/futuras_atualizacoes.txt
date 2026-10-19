@@ -7,4 +7,3 @@ Data: 2026-10-18T02:51:34
 Expressão: unknown(x)
 Motivo: A função 'unknown' ainda não está no tutor.
 Status: aguardando implementação
-

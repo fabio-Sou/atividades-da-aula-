@@ -9,6 +9,8 @@ OPERADORES
   multiplicação:        *
   divisão:              /
   potência:             ^
+  multiplicação implícita também é aceita:
+                         3x^2, 2sin(x), 4(x+1)
 
 FUNÇÕES
   seno:                 sin(x)
@@ -18,12 +20,23 @@ FUNÇÕES
   secante:              sec(x)
   cossecante:           csc(x)
   arco-tangente:        arctan(x)
+  arco-seno:            arcsin(x)
+  arco-cosseno:         arccos(x)
+  arco-cotangente:      arccot(x)
+  arco-secante:         arcsec(x)
+  arco-cossecante:      arccsc(x)
+  seno hiperbolico:     sinh(x)
+  cosseno hiperbolico:  cosh(x)
+  tangente hiperbolica: tanh(x)
+  inversas hiperbolicas: asinh(x), acosh(x), atanh(x)
+                        acoth(x), asech(x), acsch(x)
   exponencial:          exp(x) ou e^x
   logaritmo natural:    ln(x)
   logaritmo base 3:     log3(x)
   raiz quadrada:        sqrt(x) ou raiz quadrada de (x)
   raiz cúbica:           root3(x) ou raiz cúbica de (x)
   raiz quinta:           root5(x) ou raiz quinta de (x)
+  valor absoluto:       abs(x)
 
 POTÊNCIAS COM EXPOENTE VARIÁVEL
   x^x
@@ -50,6 +63,28 @@ COMANDOS DO PROGRAMA
   bloco 6    Mostra apenas o bloco 6.
   lista       Lista as regras do resumo de derivadas.
   sair        Fecha o programa.
+
+MODOS DE CALCULO DIFERENCIAL
+  Diferenciacao implicita:
+    python guia_derivadas.py --implicita "x^2+y^2=1"
+    Tambem pode ser digitado no menu: implicita x^2+y^2=1
+
+  Equacoes parametricas:
+    python guia_derivadas.py --parametrica "x=t^2; y=t^3"
+    O resultado e dy/dx = (dy/dt)/(dx/dt).
+
+  Derivadas de ordem superior:
+    python guia_derivadas.py --ordem 2 --resolver "x^4"
+    Tambem pode ser digitado no menu: ordem 2 x^4
+
+  Funcoes por partes:
+    python guia_derivadas.py --partes "x>0:x; x<0:-x"
+    Cada trecho e derivado no intervalo informado.
+
+  O valor absoluto e aceito no modo normal:
+    python guia_derivadas.py --resolver "abs(x^2-1)"
+
+Esses modos mostram as etapas e as formulas aplicadas quando solicitado.
 
 DERIVADA DE IMAGEM
   Use esse modo quando figuras como bola, triângulo ou pastel representam

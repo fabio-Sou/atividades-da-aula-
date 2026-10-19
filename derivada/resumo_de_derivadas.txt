@@ -150,6 +150,235 @@ Bloco 9 - Extensões usadas pelo tutor
 
 ---------------------------------------------
 
+9. CATÁLOGO AMPLIADO DE CÁLCULO DIFERENCIAL
+
+Esta seção reúne fórmulas de referência para futuras extensões do tutor.
+As fórmulas marcadas como referência ainda podem não estar implementadas na
+sintaxe do programa.
+
+9.1 REGRAS GERAIS
+
+01. Constante:
+    (C)' = 0
+
+02. Identidade:
+    (x)' = 1
+
+03. Soma:
+    (u + v)' = u' + v'
+
+04. Diferença:
+    (u - v)' = u' - v'
+
+05. Múltiplo constante:
+    (C·u)' = C·u'
+
+06. Produto:
+    (u·v)' = u'·v + u·v'
+
+07. Produto de três fatores:
+    (u·v·w)' = u'vw + uv'w + uvw'
+
+08. Quociente:
+    (u/v)' = (u'v - uv')/v²
+
+09. Regra da cadeia:
+    (f(g(x)))' = f'(g(x))·g'(x)
+
+10. Potência com expoente constante:
+    (u^n)' = n·u^(n-1)·u'
+
+11. Potência com base e expoente variáveis:
+    (u^v)' = u^v·(v'·ln(u) + v·u'/u)
+
+12. Recíproco:
+    (1/u)' = -u'/u²
+
+13. Função inversa:
+    Se y = f⁻¹(x), então (f⁻¹(x))' = 1/f'(f⁻¹(x))
+
+9.2 EXPONENCIAIS E LOGARITMOS
+
+01. Exponencial natural:
+    (e^u)' = e^u·u'
+
+02. Exponencial de base constante:
+    (a^u)' = a^u·ln(a)·u'
+
+03. Logaritmo natural:
+    (ln(u))' = u'/u
+
+04. Logaritmo de base constante:
+    (log_a(u))' = u'/(u·ln(a))
+
+05. Logaritmo de valor absoluto:
+    (ln|u|)' = u'/u
+
+06. Derivação logarítmica:
+    Para y = u(x)^v(x), aplique ln(y) = v·ln(u) antes de derivar.
+
+07. Exponencial composta:
+    (e^(f(g(x))))' = e^(f(g(x)))·f'(g(x))·g'(x)
+
+9.3 FUNÇÕES TRIGONOMÉTRICAS
+
+01. (sin u)' = cos(u)·u'
+02. (cos u)' = -sin(u)·u'
+03. (tan u)' = sec²(u)·u'
+04. (cot u)' = -csc²(u)·u'
+05. (sec u)' = sec(u)·tan(u)·u'
+06. (csc u)' = -csc(u)·cot(u)·u'
+
+9.4 FUNÇÕES TRIGONOMÉTRICAS INVERSAS
+
+01. (arcsin u)' = u'/sqrt(1-u²)
+02. (arccos u)' = -u'/sqrt(1-u²)
+03. (arctan u)' = u'/(1+u²)
+04. (arccot u)' = -u'/(1+u²)
+05. (arcsec u)' = u'/(|u|·sqrt(u²-1))
+06. (arccsc u)' = -u'/(|u|·sqrt(u²-1))
+
+9.5 FUNÇÕES HIPERBÓLICAS
+
+01. (sinh u)' = cosh(u)·u'
+02. (cosh u)' = sinh(u)·u'
+03. (tanh u)' = sech²(u)·u'
+04. (coth u)' = -csch²(u)·u'
+05. (sech u)' = -sech(u)·tanh(u)·u'
+06. (csch u)' = -csch(u)·coth(u)·u'
+
+9.6 FUNÇÕES HIPERBÓLICAS INVERSAS
+
+01. (asinh u)' = u'/sqrt(1+u²)
+02. (acosh u)' = u'/sqrt(u²-1)
+03. (atanh u)' = u'/(1-u²)
+04. (acoth u)' = u'/(1-u²)
+05. (asech u)' = -u'/(u·sqrt(1-u²))
+06. (acsch u)' = -u'/(|u|·sqrt(1+u²))
+
+9.7 RAÍZES E POTÊNCIAS RACIONAIS
+
+01. Raiz quadrada:
+    (sqrt(u))' = u'/(2·sqrt(u))
+
+02. Raiz de índice n:
+    (root_n(u))' = u'/(n·root_n(u)^(n-1))
+
+03. Potência racional:
+    (u^(p/q))' = (p/q)·u^((p/q)-1)·u'
+
+04. Produto de potências da mesma base:
+    u^a·u^b = u^(a+b)
+
+05. Quociente de potências da mesma base:
+    u^a/u^b = u^(a-b)
+
+9.8 DIFERENCIAÇÃO IMPLÍCITA
+
+01. Se F(x,y) = 0, então:
+    dy/dx = -F_x/F_y
+
+02. Ao derivar uma função de y:
+    d/dx[f(y)] = f'(y)·y'
+
+03. Exemplo:
+    x² + y² = 1
+    2x + 2y·y' = 0
+    y' = -x/y
+
+9.9 EQUAÇÕES PARAMÉTRICAS
+
+Se x = x(t) e y = y(t):
+
+01. Primeira derivada:
+    dy/dx = (dy/dt)/(dx/dt)
+
+02. Segunda derivada:
+    d²y/dx² = (d/dt(dy/dx))/(dx/dt)
+
+03. Desde que dx/dt ≠ 0.
+
+9.10 DERIVADAS DE ORDEM SUPERIOR
+
+01. Segunda derivada:
+    f''(x) = d/dx[f'(x)]
+
+02. Derivada de ordem n:
+    f^(n)(x) = d/dx[f^(n-1)(x)]
+
+03. Produto de Leibniz:
+    (uv)^(n) = Σ(k=0 até n) C(n,k)·u^(k)·v^(n-k)
+
+04. Derivadas de uma potência de x:
+    (x^m)^(n) = m(m-1)...(m-n+1)·x^(m-n)
+
+9.11 DERIVADAS DE FUNÇÕES DE DUAS OU MAIS VARIÁVEIS
+
+01. Derivada parcial:
+    ∂f/∂x = limite de [f(x+h,y)-f(x,y)]/h
+
+02. Gradiente:
+    ∇f = (∂f/∂x, ∂f/∂y, ...)
+
+03. Regra da cadeia para z=f(x,y), x=x(t), y=y(t):
+    dz/dt = f_x·dx/dt + f_y·dy/dt
+
+04. Derivadas direcionais:
+    D_u f = ∇f·u, com |u|=1
+
+9.12 VALOR ABSOLUTO, SINAIS E FUNÇÕES POR PARTES
+
+01. Para u(x) ≠ 0:
+    (|u|)' = u'·u/|u|
+
+02. Funções por partes devem ser derivadas em cada intervalo.
+
+03. Em pontos de troca, verifique separadamente continuidade e derivadas
+    laterais; a derivada pode não existir.
+
+9.13 DERIVADAS DE FUNÇÕES ESPECIAIS (REFERÊNCIA FUTURA)
+
+Estas fórmulas ficam registradas para uma etapa posterior e não significam
+que o tutor já aceite essas funções:
+
+01. Função gama:
+    (Γ(x))' = Γ(x)·ψ(x)
+
+02. Função beta:
+    ∂B(x,y)/∂x = B(x,y)·(ψ(x)-ψ(x+y))
+
+03. Função erro:
+    (erf(u))' = 2·e^(-u²)·u'/sqrt(π)
+
+04. Função de Bessel:
+    (J_ν(u))' = (J_(ν-1)(u)-J_(ν+1)(u))·u'/2
+
+05. Funções especiais exigem definições, domínios e convenções adicionais.
+
+---------------------------------------------
+
+FONTES DE REFERÊNCIA CONSULTADAS
+
+- Wolfram MathWorld, Product Rule:
+  https://mathworld.wolfram.com/ProductRule.html
+- Wolfram MathWorld, Quotient Rule:
+  https://mathworld.wolfram.com/QuotientRule.html
+- Wolfram MathWorld, Chain Rule:
+  https://mathworld.wolfram.com/ChainRule.html
+- Wolfram MathWorld, Trigonometric Functions:
+  https://mathworld.wolfram.com/TrigonometricFunctions.html
+- Wolfram MathWorld, Inverse Trigonometric Functions:
+  https://mathworld.wolfram.com/InverseTrigonometricFunctions.html
+- Wolfram MathWorld, Inverse Hyperbolic Functions:
+  https://mathworld.wolfram.com/InverseHyperbolicFunctions.html
+- Wolfram MathWorld, Parametric Derivative:
+  https://mathworld.wolfram.com/ParametricDerivative.html
+
+Observação: este catálogo é uma referência de fórmulas, não uma promessa de
+que toda função já esteja implementada no parser do guia_derivadas.py.
+
+---------------------------------------------
+
 9. EXTENSÕES USADAS PELO TUTOR
 
 Estas regras complementam o guia para expressões com funções inversas e
@@ -160,6 +389,12 @@ raízes de índice constante.
 
 02. Raiz de índice n:
     (raiz_n(u))' = u'/(n·raiz_n(u)^(n-1))
+
+03. Arco-seno:
+    (arcsin(u))' = u'/sqrt(1-u²)
+
+04. Arco-cosseno:
+    (arccos(u))' = -u'/sqrt(1-u²)
 
 ---------------------------------------------
 

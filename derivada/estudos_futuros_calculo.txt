@@ -1,0 +1,71 @@
+ESTUDOS FUTUROS DE CALCULO DIFERENCIAL
+======================================
+
+Os grupos abaixo continuam somente como material de observacao. Eles ainda
+nao foram implementados no tutor nem adicionados ao jogo.
+
+
+1. FUNCOES DE VARIAS VARIAVEIS
+------------------------------
+
+Quando uma funcao depende de x e y, podemos derivar em relacao a uma
+variavel mantendo as outras constantes.
+
+Exemplo 1:
+    f(x,y) = x^2*y + sin(y)
+    partial f/partial x = 2x*y
+    partial f/partial y = x^2 + cos(y)
+
+Exemplo 2:
+    f(x,y) = x^3 + x*y^2
+    partial f/partial x = 3x^2 + y^2
+    partial f/partial y = 2xy
+
+Tambem ficam para depois:
+    - gradiente;
+    - derivadas direcionais;
+    - regra da cadeia para varias variaveis.
+
+
+2. FUNCOES ESPECIAIS
+--------------------
+
+Estas funcoes pertencem a calculo mais avancado e nao sao necessarias para
+o tutor basico neste momento.
+
+2.1 Funcao gama
+
+    (Gamma(x))' = Gamma(x)*psi(x)
+
+Exemplo:
+    y = Gamma(2x+1)
+    y' = 2*Gamma(2x+1)*psi(2x+1)
+
+2.2 Funcao beta
+
+    partial B(x,y)/partial x =
+    B(x,y)*(psi(x)-psi(x+y))
+
+Exemplo:
+    y = B(x,2x)
+    a derivada exige a regra da cadeia e funcoes psi.
+
+2.3 Funcao erro
+
+    (erf(u))' = 2*exp(-u^2)*u'/sqrt(pi)
+
+Exemplo:
+    y = erf(x^2)
+    y' = 4x*exp(-x^4)/sqrt(pi)
+
+2.4 Funcao de Bessel
+
+    (J_nu(u))' =
+    (J_(nu-1)(u)-J_(nu+1)(u))*u'/2
+
+Exemplo:
+    y = J_2(x^2)
+    y' = x*(J_1(x^2)-J_3(x^2))
+
+Essas funcoes exigem definicoes, dominios e uma representacao propria no
+parser. Por isso ficam reservadas para uma fase avancada.

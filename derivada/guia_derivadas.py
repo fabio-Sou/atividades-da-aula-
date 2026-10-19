@@ -12,9 +12,11 @@ from __future__ import annotations
 
 import argparse
 import ast
+import os
 import random
 import re
 import sys
+import textwrap
 import unicodedata
 from dataclasses import dataclass
 from datetime import datetime
@@ -29,7 +31,9 @@ COMANDOS = PASTA / "comandos_derivadas.txt"
 TESTES_DERIVADAS = PASTA / "testes_derivadas.txt"
 FUTURAS_ATUALIZACOES = PASTA / "futuras_atualizacoes.txt"
 MODO_IMAGEM = False
+MODO_IMPLICITA = False
 SIMBOLOS_VARIAVEIS: set[str] = set()
+MODO_DESENVOLVEDOR = False
 
 @dataclass(frozen=True)
 class Formula:
@@ -176,6 +180,37 @@ def _formulas() -> tuple[Formula, ...]:
         [
             ("Arco-tangente", "(arctan u)' = u'/(1+u^2)", "Use-se quando a funcao e arco-tangente.", ("arctan", "inversa trigonometrica")),
             ("Raiz de indice n", "(raiz_n(u))' = u'/(n*raiz_n(u)^(n-1))", "Use-se para uma raiz de indice constante.", ("raiz", "root")),
+            ("Arco-seno", "(arcsin u)' = u'/sqrt(1-u^2)", "Use-se quando a funcao e arco-seno.", ("arcsin", "arco seno", "inversa trigonometrica")),
+            ("Arco-cosseno", "(arccos u)' = -u'/sqrt(1-u^2)", "Use-se quando a funcao e arco-cosseno.", ("arccos", "arco cosseno", "inversa trigonometrica")),
+            ("Arco-cotangente", "(arccot u)' = -u'/(1+u^2)", "Use-se quando a funcao e arco-cotangente.", ("arccot",)),
+            ("Arco-secante", "(arcsec u)' = u'/(abs(u)*sqrt(u^2-1))", "Use-se quando a funcao e arco-secante.", ("arcsec",)),
+            ("Arco-cossecante", "(arccsc u)' = -u'/(abs(u)*sqrt(u^2-1))", "Use-se quando a funcao e arco-cossecante.", ("arccsc",)),
+        ],
+    )
+    adicionar(
+        "10",
+        2,
+        [
+            ("Seno hiperbolico", "(sinh u)' = cosh(u)*u'", "Aplique a regra da cadeia.", ("sinh",)),
+            ("Cosseno hiperbolico", "(cosh u)' = sinh(u)*u'", "Aplique a regra da cadeia.", ("cosh",)),
+            ("Tangente hiperbolica", "(tanh u)' = sech(u)^2*u'", "Aplique a regra da cadeia.", ("tanh",)),
+            ("Cotangente hiperbolica", "(coth u)' = -csch(u)^2*u'", "Aplique a regra da cadeia.", ("coth",)),
+            ("Secante hiperbolica", "(sech u)' = -sech(u)*tanh(u)*u'", "Aplique a regra da cadeia.", ("sech",)),
+            ("Cossecante hiperbolica", "(csch u)' = -csch(u)*coth(u)*u'", "Aplique a regra da cadeia.", ("csch",)),
+            ("Arco-seno hiperbolico", "(asinh u)' = u'/sqrt(1+u^2)", "Use a regra da cadeia.", ("asinh",)),
+            ("Arco-cosseno hiperbolico", "(acosh u)' = u'/sqrt(u^2-1)", "Use a regra da cadeia.", ("acosh",)),
+            ("Arco-tangente hiperbolico", "(atanh u)' = u'/(1-u^2)", "Use a regra da cadeia.", ("atanh",)),
+            ("Arco-cotangente hiperbolico", "(acoth u)' = u'/(1-u^2)", "Use a regra da cadeia.", ("acoth",)),
+            ("Arco-secante hiperbolico", "(asech u)' = -u'/(u*sqrt(1-u^2))", "Use a regra da cadeia.", ("asech",)),
+            ("Arco-cossecante hiperbolico", "(acsch u)' = -u'/(abs(u)*sqrt(1+u^2))", "Use a regra da cadeia.", ("acsch",)),
+        ],
+    )
+    adicionar(
+        "11",
+        2,
+        [
+            ("Valor absoluto", "(abs u)' = u'*u/abs(u)", "A fórmula vale onde u é diferente de zero.", ("abs",)),
+            ("Função por partes", "Derive cada trecho no seu intervalo.", "Verifique também os pontos de troca.", ("por partes",)),
         ],
     )
     itens.append(
@@ -262,6 +297,12 @@ def normalizar(texto: str) -> str:
     return " ".join(texto.casefold().split())
 
 
+def limpar_tela() -> None:
+    """Limpa somente as transições de tela; o modo desenvolvedor preserva o log."""
+    if not MODO_DESENVOLVEDOR:
+        os.system("cls" if os.name == "nt" else "clear")
+
+
 def remover_acentos(texto: str) -> str:
     return "".join(
         caractere
@@ -281,6 +322,23 @@ def traduzir_portugues(expressao: str) -> str:
         "secante": "sec",
         "cossecante": "csc",
         "arco tangente": "arctan",
+        "arco seno": "arcsin",
+        "arco cosseno": "arccos",
+        "arco cotangente": "arccot",
+        "arco secante": "arcsec",
+        "arco cossecante": "arccsc",
+        "seno hiperbolico": "sinh",
+        "cosseno hiperbolico": "cosh",
+        "tangente hiperbolica": "tanh",
+        "cotangente hiperbolica": "coth",
+        "secante hiperbolica": "sech",
+        "cossecante hiperbolica": "csch",
+        "arco seno hiperbolico": "asinh",
+        "arco cosseno hiperbolico": "acosh",
+        "arco tangente hiperbolico": "atanh",
+        "arco cotangente hiperbolico": "acoth",
+        "arco secante hiperbolico": "asech",
+        "arco cossecante hiperbolico": "acsch",
         "exponencial": "exp",
         "logaritmo natural": "ln",
     }
@@ -333,9 +391,28 @@ def por_codigo(codigo: str) -> Formula | None:
 
 def imprimir_formula(item: Formula) -> None:
     print(f"\n[{item.codigo}] {item.nome} (Bloco {item.bloco})")
-    print(f"Formula: {item.formula}")
-    print(f"Como usar: {item.explicacao}")
+    print("\n  Fórmula:")
+    imprimir_texto_formatado(item.formula, indent="      ")
+    print("\n  Como usar:")
+    imprimir_texto_formatado(item.explicacao, indent="      ")
     print(f"Referência: resumo_de_derivadas.txt, seção {item.codigo}")
+
+
+def imprimir_texto_formatado(texto: str, indent: str = "      ", largura: int = 86) -> None:
+    """Exibe blocos longos com recuo e quebra de linha sem poluir a tela."""
+    for linha in texto.splitlines():
+        if not linha.strip():
+            print()
+            continue
+        conteudo = linha.strip()
+        partes = textwrap.wrap(
+            conteudo,
+            width=max(20, largura - len(indent)),
+            break_long_words=False,
+            break_on_hyphens=False,
+        )
+        for parte in partes or [""]:
+            print(f"{indent}{parte}")
 
 
 def listar() -> None:
@@ -368,10 +445,22 @@ def carregar_questoes_jogo() -> list[QuestaoJogo]:
     teste_atual: int | None = None
     candidato: str | None = None
     modo_imagem = False
+    modo_especial = False
 
     def salvar_candidato() -> None:
-        if teste_atual is not None and candidato:
-            questoes.append(QuestaoJogo(candidato, modo_imagem))
+        if teste_atual is not None and candidato and not modo_especial:
+            simbolos_de_imagem = {
+                "voce",
+                "seu_amigo",
+                "seu_parceiro",
+                "guarda_chuva",
+                "gota",
+                "sarrada",
+                "fusca",
+            }
+            nomes = set(re.findall(r"\b[A-Za-z_][A-Za-z_0-9]*\b", candidato.casefold()))
+            usa_imagem = modo_imagem or bool(nomes & simbolos_de_imagem)
+            questoes.append(QuestaoJogo(candidato, usa_imagem))
 
     for linha in TESTES_DERIVADAS.read_text(encoding="utf-8").splitlines():
         cabecalho = re.match(r"^(\d{2})\.\s+", linha)
@@ -380,6 +469,7 @@ def carregar_questoes_jogo() -> list[QuestaoJogo]:
             teste_atual = int(cabecalho.group(1))
             candidato = None
             modo_imagem = 20 <= teste_atual <= 23
+            modo_especial = teste_atual >= 85
             continue
         if teste_atual is None or candidato is not None:
             continue
@@ -424,8 +514,9 @@ def preparar_e_derivar(
     expressao: str, derivada_de_imagem: bool = False
 ) -> tuple[str, list[tuple[str, str, str]]]:
     """Prepara e deriva sem imprimir nem solicitar respostas ao usuário."""
-    global MODO_IMAGEM, SIMBOLOS_VARIAVEIS
+    global MODO_IMAGEM, MODO_IMPLICITA, SIMBOLOS_VARIAVEIS
     estado_anterior = MODO_IMAGEM
+    implicitamente = MODO_IMPLICITA
     simbolos_anteriores = SIMBOLOS_VARIAVEIS
     MODO_IMAGEM = derivada_de_imagem
     SIMBOLOS_VARIAVEIS = set()
@@ -436,7 +527,139 @@ def preparar_e_derivar(
         return derivar(arvore)
     finally:
         MODO_IMAGEM = estado_anterior
+        MODO_IMPLICITA = implicitamente
         SIMBOLOS_VARIAVEIS = simbolos_anteriores
+
+
+def _combinar_expressao(esquerda: str, operador: str, direita: str) -> str:
+    return simplificar(f"({esquerda}){operador}({direita})")
+
+
+def _separar_dy(no: ast.AST) -> tuple[str, str] | None:
+    """Separa uma expressão afim em coeficiente de dy e termo independente."""
+    if isinstance(no, ast.Name) and no.id == "dy":
+        return "1", "0"
+    if isinstance(no, (ast.Constant, ast.Name, ast.Call)):
+        if "dy" in ast.unparse(no):
+            return None
+        return "0", ast.unparse(no).replace("**", "^")
+    if isinstance(no, ast.UnaryOp) and isinstance(no.op, ast.USub):
+        partes = _separar_dy(no.operand)
+        if partes is None:
+            return None
+        return f"-({partes[0]})", f"-({partes[1]})"
+    if isinstance(no, ast.BinOp):
+        esquerda = _separar_dy(no.left)
+        direita = _separar_dy(no.right)
+        if esquerda is None or direita is None:
+            return None
+        if isinstance(no.op, ast.Add):
+            return _combinar_expressao(esquerda[0], "+", direita[0]), _combinar_expressao(
+                esquerda[1], "+", direita[1]
+            )
+        if isinstance(no.op, ast.Sub):
+            return _combinar_expressao(esquerda[0], "-", direita[0]), _combinar_expressao(
+                esquerda[1], "-", direita[1]
+            )
+        if isinstance(no.op, ast.Mult):
+            if esquerda[0] != "0" and direita[0] != "0":
+                return None
+            if esquerda[0] != "0":
+                return _combinar_expressao(esquerda[0], "*", direita[1]), _combinar_expressao(
+                    esquerda[1], "*", direita[1]
+                )
+            if direita[0] != "0":
+                return _combinar_expressao(direita[0], "*", esquerda[1]), _combinar_expressao(
+                    esquerda[1], "*", direita[1]
+                )
+            return "0", _combinar_expressao(esquerda[1], "*", direita[1])
+        if isinstance(no.op, ast.Div):
+            if direita[0] != "0":
+                return None
+            return _combinar_expressao(esquerda[0], "/", direita[1]), _combinar_expressao(
+                esquerda[1], "/", direita[1]
+            )
+    return None
+
+
+def preparar_implicita(equacao: str) -> tuple[str, list[str]]:
+    """Deriva uma equação F(x,y)=G(x,y) e isola y' quando possível."""
+    global MODO_IMPLICITA
+    partes = re.split(r"(?<![<>=])=(?!=)", equacao, maxsplit=1)
+    if len(partes) != 2:
+        raise ExpressaoInvalida("Use uma equação no formato esquerda = direita.")
+    anterior = MODO_IMPLICITA
+    MODO_IMPLICITA = True
+    try:
+        esquerda = ast.parse(preparar_expressao(traduzir_portugues(partes[0])), mode="eval").body
+        direita = ast.parse(preparar_expressao(traduzir_portugues(partes[1])), mode="eval").body
+        derivada_esquerda, _ = derivar(esquerda)
+        derivada_direita, _ = derivar(direita)
+        diferenca = ast.parse(
+            preparar_expressao(f"({derivada_esquerda})-({derivada_direita})"),
+            mode="eval",
+        ).body
+        separado = _separar_dy(diferenca)
+        if separado is None or separado[0] == "0":
+            raise ExpressaoInvalida("A equação não é linear em y' para este tutor.")
+        coeficiente, termo = separado
+        resultado = simplificar(f"-({termo})/({coeficiente})")
+        return resultado, [
+            f"Derivada da esquerda: {derivada_esquerda}",
+            f"Derivada da direita: {derivada_direita}",
+            f"{coeficiente}*y' + ({termo}) = 0",
+            f"y' = {resultado}",
+        ]
+    finally:
+        MODO_IMPLICITA = anterior
+
+
+def preparar_parametrica(entrada: str) -> tuple[str, list[str]]:
+    partes = re.split(r";|\n", entrada)
+    atribuicoes = {}
+    for parte in partes:
+        correspondencia = re.match(r"\s*([xy])(?:\s*\(\s*t\s*\))?\s*=\s*(.+)", parte, re.IGNORECASE)
+        if correspondencia:
+            atribuicoes[correspondencia.group(1).casefold()] = correspondencia.group(2).strip()
+    if set(atribuicoes) != {"x", "y"}:
+        raise ExpressaoInvalida("Use o formato x=t^2; y=t^3.")
+    derivada_x, _ = preparar_e_derivar(atribuicoes["x"])
+    derivada_y, _ = preparar_e_derivar(atribuicoes["y"])
+    resultado = simplificar(f"({derivada_y})/({derivada_x})")
+    substituir_t = lambda texto: re.sub(r"\bx\b", "t", texto)
+    resultado_t = substituir_t(resultado)
+    return resultado_t, [
+        f"dx/dt = {substituir_t(derivada_x)}",
+        f"dy/dt = {substituir_t(derivada_y)}",
+        f"dy/dx = (dy/dt)/(dx/dt) = {resultado_t}",
+    ]
+
+
+def preparar_ordem(expressao: str, ordem: int) -> tuple[str, list[str]]:
+    if ordem < 1:
+        raise ExpressaoInvalida("A ordem precisa ser um número positivo.")
+    atual = expressao
+    etapas: list[str] = []
+    for numero in range(1, ordem + 1):
+        atual, _ = preparar_e_derivar(atual)
+        etapas.append(f"Derivada de ordem {numero}: {atual}")
+    return atual, etapas
+
+
+def preparar_por_partes(entrada: str) -> tuple[list[tuple[str, str]], list[str]]:
+    partes = [parte.strip() for parte in entrada.split(";") if parte.strip()]
+    if len(partes) < 2:
+        raise ExpressaoInvalida("Use condição:expressão; condição:expressão.")
+    resultados: list[tuple[str, str]] = []
+    etapas: list[str] = []
+    for parte in partes:
+        if ":" not in parte:
+            raise ExpressaoInvalida("Cada trecho precisa ter condição:expressão.")
+        condicao, expressao = (item.strip() for item in parte.split(":", 1))
+        derivada, _ = preparar_e_derivar(expressao)
+        resultados.append((condicao, derivada))
+        etapas.append(f"Se {condicao}: ({expressao})' = {derivada}")
+    return resultados, etapas
 
 
 def _chave_equivalencia(no: ast.AST) -> tuple:
@@ -479,28 +702,34 @@ def expressoes_equivalentes(primeira: str, segunda: str) -> bool:
     )
 
 
-def jogar_derivada(modo: str) -> None:
+def jogar_derivada(modo: str) -> bool:
     pontos = 0
     tentativas = 0
     questoes = carregar_questoes_jogo()
     random.shuffle(questoes)
     if not questoes:
         print(f"\nNenhuma questão foi encontrada em {TESTES_DERIVADAS.name}.")
-        return
+        return False
+    voltar_menu_principal = False
+    limpar_tela()
     print(f"\n=== Modo jogo: {modo.capitalize()} ===")
     print("Digite 'sair' a qualquer momento para voltar ao menu.")
     while questoes:
         questao = questoes.pop()
         expressao = questao.expressao
+        limpar_tela()
+        print(f"\n=== Modo jogo: {modo.capitalize()} ===")
         print(f"\nDerive:\n      f(x) = {expressao}")
         if questao.derivada_de_imagem:
             print("      (esta questão usa o modo de derivada de imagem)")
         if modo == "tutor":
-            resolver(
+            if resolver(
                 expressao,
                 derivada_de_imagem=questao.derivada_de_imagem,
                 registrar_falha=False,
-            )
+            ):
+                voltar_menu_principal = True
+                break
         else:
             if modo == "treino":
                 print("\n1. Responder  2. Ver dica  3. Resolver junto  4. Pular")
@@ -508,6 +737,7 @@ def jogar_derivada(modo: str) -> None:
                 print("\n1. Responder  2. Ver solução  3. Pular")
             escolha = input("> ").strip().casefold()
             if escolha == "sair":
+                voltar_menu_principal = True
                 break
             try:
                 resposta_correta, _ = preparar_e_derivar(
@@ -521,7 +751,9 @@ def jogar_derivada(modo: str) -> None:
                 print(f"\nDica: tente identificar a estrutura principal de {expressao}.")
                 escolha = input("Digite sua resposta ou 'pular':\n> ").strip()
             elif escolha == "3" and modo == "treino":
-                resolver(expressao, registrar_falha=False)
+                if resolver(expressao, registrar_falha=False):
+                    voltar_menu_principal = True
+                    break
                 continue
             elif escolha == "2" and modo == "desafio":
                 print(f"\nResposta de referência: f'(x) = {formatar_resultado(resposta_correta)}")
@@ -538,6 +770,7 @@ def jogar_derivada(modo: str) -> None:
             else:
                 resposta = input("Digite sua derivada:\n> ").strip()
             if resposta.casefold() == "sair":
+                voltar_menu_principal = True
                 break
             tentativas += 1
             if expressoes_equivalentes(resposta, resposta_correta):
@@ -553,14 +786,20 @@ def jogar_derivada(modo: str) -> None:
             continuar = input("\nOutra questão? (S/N)\n> ").strip().casefold()
         except (EOFError, KeyboardInterrupt):
             print()
+            voltar_menu_principal = True
+            break
+        if continuar == "sair":
+            voltar_menu_principal = True
             break
         if continuar not in {"s", "sim", "y", "yes"}:
             break
     print(f"\nPontuação: {pontos}/{tentativas} tentativa(s).")
+    return voltar_menu_principal
 
 
 def menu_jogo() -> None:
     while True:
+        limpar_tela()
         print("\n=== Jogo de derivadas ===")
         print("1. Treino (pode pedir dica)")
         print("2. Desafio (sem dica automática)")
@@ -571,12 +810,17 @@ def menu_jogo() -> None:
         except (EOFError, KeyboardInterrupt):
             print()
             return
+        if escolha == "sair":
+            return
         if escolha == "1":
-            jogar_derivada("treino")
+            if jogar_derivada("treino"):
+                return
         elif escolha == "2":
-            jogar_derivada("desafio")
+            if jogar_derivada("desafio"):
+                return
         elif escolha == "3":
-            jogar_derivada("tutor")
+            if jogar_derivada("tutor"):
+                return
         elif escolha == "4":
             return
         else:
@@ -981,6 +1225,8 @@ def preparar_expressao(expressao: str) -> str:
         expressao,
         flags=re.IGNORECASE,
     )
+    # Aceita a multiplicação implícita usual da notação matemática: 3x -> 3*x.
+    expressao = re.sub(r"(?<=\d)(?=[A-Za-z_(])", "*", expressao)
     expressao = expressao.replace("^", "**")
     return expressao
 
@@ -996,6 +1242,8 @@ def derivar(no: ast.AST) -> tuple[str, list[tuple[str, str, str]]]:
     if isinstance(no, ast.Name):
         if no.id == "x":
             return "1", []
+        if no.id == "y" and MODO_IMPLICITA:
+            return "dy", []
         if no.id == "e":
             return "0", []
         if MODO_IMAGEM or no.id in SIMBOLOS_VARIAVEIS:
@@ -1119,6 +1367,24 @@ def derivar(no: ast.AST) -> tuple[str, list[tuple[str, str, str]]]:
             "sec": ("sec*tan", "03.05", "Secante"),
             "csc": ("-csc*cot", "03.06", "Cossecante"),
             "arctan": ("1/(1+u^2)", "09.01", "Arco-tangente"),
+            "arcsin": ("1/sqrt(1-u^2)", "09.03", "Arco-seno"),
+            "arccos": ("-1/sqrt(1-u^2)", "09.04", "Arco-cosseno"),
+            "arccot": ("-1/(1+u^2)", "09.05", "Arco-cotangente"),
+            "arcsec": ("1/(abs(u)*sqrt(u^2-1))", "09.06", "Arco-secante"),
+            "arccsc": ("-1/(abs(u)*sqrt(u^2-1))", "09.07", "Arco-cossecante"),
+            "sinh": ("cosh", "10.01", "Seno hiperbolico"),
+            "cosh": ("sinh", "10.02", "Cosseno hiperbolico"),
+            "tanh": ("sech^2", "10.03", "Tangente hiperbolica"),
+            "coth": ("-csch^2", "10.04", "Cotangente hiperbolica"),
+            "sech": ("-sech*tanh", "10.05", "Secante hiperbolica"),
+            "csch": ("-csch*coth", "10.06", "Cossecante hiperbolica"),
+            "asinh": ("1/sqrt(1+u^2)", "10.07", "Arco-seno hiperbolico"),
+            "acosh": ("1/sqrt(u^2-1)", "10.08", "Arco-cosseno hiperbolico"),
+            "atanh": ("1/(1-u^2)", "10.09", "Arco-tangente hiperbolico"),
+            "acoth": ("1/(1-u^2)", "10.10", "Arco-cotangente hiperbolico"),
+            "asech": ("-1/(u*sqrt(1-u^2))", "10.11", "Arco-secante hiperbolico"),
+            "acsch": ("-1/(abs(u)*sqrt(1+u^2))", "10.12", "Arco-cossecante hiperbolico"),
+            "abs": ("u/abs(u)", "11.01", "Valor absoluto"),
             "exp": ("exp", "01.06", "Exponencial"),
             "ln": ("1/", "01.07", "Logaritmo natural"),
             "log": ("1/", "01.07", "Logaritmo natural"),
@@ -1184,6 +1450,40 @@ def derivar(no: ast.AST) -> tuple[str, list[tuple[str, str, str]]]:
             resultado = f"-csc({argumento_interno})*cot({argumento_interno})*({argumento_derivado})"
         elif funcao == "arctan":
             resultado = f"({argumento_derivado})/(1+({argumento_interno})^2)"
+        elif funcao == "arcsin":
+            resultado = f"({argumento_derivado})/sqrt(1-({argumento_interno})^2)"
+        elif funcao == "arccos":
+            resultado = f"-({argumento_derivado})/sqrt(1-({argumento_interno})^2)"
+        elif funcao == "arccot":
+            resultado = f"-({argumento_derivado})/(1+({argumento_interno})^2)"
+        elif funcao == "arcsec":
+            resultado = f"({argumento_derivado})/(abs({argumento_interno})*sqrt(({argumento_interno})^2-1))"
+        elif funcao == "arccsc":
+            resultado = f"-({argumento_derivado})/(abs({argumento_interno})*sqrt(({argumento_interno})^2-1))"
+        elif funcao == "sinh":
+            resultado = f"cosh({argumento_interno})*({argumento_derivado})"
+        elif funcao == "cosh":
+            resultado = f"sinh({argumento_interno})*({argumento_derivado})"
+        elif funcao == "tanh":
+            resultado = f"sech({argumento_interno})^2*({argumento_derivado})"
+        elif funcao == "coth":
+            resultado = f"-csch({argumento_interno})^2*({argumento_derivado})"
+        elif funcao == "sech":
+            resultado = f"-sech({argumento_interno})*tanh({argumento_interno})*({argumento_derivado})"
+        elif funcao == "csch":
+            resultado = f"-csch({argumento_interno})*coth({argumento_interno})*({argumento_derivado})"
+        elif funcao == "asinh":
+            resultado = f"({argumento_derivado})/sqrt(1+({argumento_interno})^2)"
+        elif funcao == "acosh":
+            resultado = f"({argumento_derivado})/sqrt(({argumento_interno})^2-1)"
+        elif funcao in {"atanh", "acoth"}:
+            resultado = f"({argumento_derivado})/(1-({argumento_interno})^2)"
+        elif funcao == "asech":
+            resultado = f"-({argumento_derivado})/(({argumento_interno})*sqrt(1-({argumento_interno})^2))"
+        elif funcao == "acsch":
+            resultado = f"-({argumento_derivado})/(abs({argumento_interno})*sqrt(1+({argumento_interno})^2))"
+        elif funcao == "abs":
+            resultado = f"({argumento_derivado})*({argumento_interno})/abs({argumento_interno})"
         else:
             resultado = f"{forma}({argumento_interno})*({argumento_derivado})"
         resultado = simplificar(resultado)
@@ -1330,8 +1630,27 @@ def mostrar_exemplos(codigo: str) -> None:
             "Exemplo mais complexo:\n"
             "      (raiz_5(x²+1))' = 2x/(5*raiz_5(x²+1)^4)"
         ),
+        "09.03": (
+            "Fórmula do arco-seno:\n"
+            "      (arcsin(u))' = u'/sqrt(1-u²)\n"
+            "Usa-se para derivar o arco-seno de uma função.\n\n"
+            "Exemplo simples:\n"
+            "      (arcsin(x))' = 1/sqrt(1-x²)"
+        ),
+        "09.04": (
+            "Fórmula do arco-cosseno:\n"
+            "      (arccos(u))' = -u'/sqrt(1-u²)\n"
+            "Usa-se para derivar o arco-cosseno de uma função.\n\n"
+            "Exemplo simples:\n"
+            "      (arccos(x))' = -1/sqrt(1-x²)"
+        ),
     }
-    print(exemplos.get(codigo, "Fórmula encontrada, mas exemplos ainda não foram cadastrados."))
+    print()
+    imprimir_texto_formatado(
+        exemplos.get(codigo, "Fórmula encontrada, mas exemplos ainda não foram cadastrados."),
+        indent="      ",
+    )
+    print()
 
 
 def detalhes_regra(codigo: str) -> tuple[str, str]:
@@ -1349,6 +1668,8 @@ def detalhes_regra(codigo: str) -> tuple[str, str]:
         "03.03": ("Fórmula da tangente", "Usa-se quando a função é tangente."),
         "09.01": ("Fórmula do arco-tangente", "Usa-se quando a função é arco-tangente."),
         "09.02": ("Fórmula da raiz de índice n", "Usa-se quando o índice da raiz é constante."),
+        "09.03": ("Fórmula do arco-seno", "Usa-se para derivar o arco-seno de uma função."),
+        "09.04": ("Fórmula do arco-cosseno", "Usa-se para derivar o arco-cosseno de uma função."),
     }
     return detalhes.get(codigo, ("Fórmula da regra", "Usa-se conforme a estrutura da função."))
 
@@ -1377,7 +1698,7 @@ def resolver(
     expressao: str,
     derivada_de_imagem: bool = False,
     registrar_falha: bool = True,
-) -> None:
+) -> bool:
     global MODO_IMAGEM, SIMBOLOS_VARIAVEIS
     estado_anterior = MODO_IMAGEM
     simbolos_anteriores = SIMBOLOS_VARIAVEIS
@@ -1392,23 +1713,26 @@ def resolver(
             preparada = "(x+2)/(2*x+3)"
         arvore = ast.parse(preparada, mode="eval").body
         arvore_original = arvore
+        print("\nA equação informada:")
+        imprimir_texto_formatado(f"f(x) = {expressao.strip()}")
+        print("\nForma interpretada pelo tutor:")
+        imprimir_texto_formatado(f"f(x) = {texto_no(arvore_original)}")
         atalho = encontrar_atalho_trigonometrico(arvore)
         usar_atalho = False
         if atalho is not None:
             arvore_reduzida, pares = atalho
-            print(f"\nA equação é: f(x) = {texto_no(arvore_original)}")
             print("\nExiste uma forma mais curta de resolver esta expressão.")
             print("Foram encontrados os seguintes pares recíprocos:")
             fatores_atuais = [texto_no(fator) for fator in _fatores_produto(arvore_original)]
             for numero, (esquerda, direita) in enumerate(pares, 1):
                 print(f"\nAtalho {numero}:")
-                print(f"      {esquerda} * {direita} = 1")
+                imprimir_texto_formatado(f"{esquerda} * {direita} = 1")
                 fatores_atuais.remove(esquerda)
                 fatores_atuais.remove(direita)
                 expressao_restante = " * ".join(fatores_atuais) or "1"
-                print(f"      expressão restante = {expressao_restante}")
+                imprimir_texto_formatado(f"expressão restante = {expressao_restante}")
             print("\nAssim, a expressão pode ser reduzida para:")
-            print(f"      f(x) = {texto_no(arvore_reduzida)}")
+            imprimir_texto_formatado(f"f(x) = {texto_no(arvore_reduzida)}")
             try:
                 resposta = input(
                     "\nQuer usar esse atalho antes de derivar? (S/N)\n> "
@@ -1421,7 +1745,15 @@ def resolver(
                 print("\nResolução escolhida: simplificação trigonométrica.")
                 print("A derivada da expressão reduzida será calculada agora.")
                 arvore = arvore_reduzida
+        arvore_antes_simplificacao = arvore
         arvore = _simplificar_ast(arvore)
+        if not _mesmo_no(arvore_antes_simplificacao, arvore):
+            print("\nSimplificação algébrica antes da derivada:")
+            imprimir_texto_formatado(
+                f"f(x) = {formatar_resultado(_texto_interno(arvore_antes_simplificacao))}"
+            )
+            for etapa in simplificar_com_etapas(_texto_interno(arvore_antes_simplificacao)):
+                imprimir_texto_formatado(f"= {formatar_resultado(etapa)}")
         resultado, etapas = derivar(arvore)
         if forma_fracao_aninhada:
             resultado = "1/(2*x+3)^2"
@@ -1430,7 +1762,7 @@ def resolver(
         print("Exemplo aceito: sin(x^2), (x^3 * exp(x)) / ln(x)")
         MODO_IMAGEM = estado_anterior
         SIMBOLOS_VARIAVEIS = simbolos_anteriores
-        return
+        return False
     except ExpressaoInvalida as erro:
         if registrar_falha:
             registrar_futura_atualizacao(expressao, str(erro))
@@ -1438,7 +1770,7 @@ def resolver(
         print(f"Ela foi registrada em: {FUTURAS_ATUALIZACOES.name}")
         MODO_IMAGEM = estado_anterior
         SIMBOLOS_VARIAVEIS = simbolos_anteriores
-        return
+        return False
     finally:
         MODO_IMAGEM = estado_anterior
         SIMBOLOS_VARIAVEIS = simbolos_anteriores
@@ -1446,26 +1778,32 @@ def resolver(
     if forma_fracao_aninhada:
         mostrar_reducao_fracao_aninhada()
     if not usar_atalho:
-        print(f"\nA equação é: f(x) = {texto_no(arvore)}")
+        print("\nForma usada na derivação:")
+        imprimir_texto_formatado(f"f(x) = {texto_no(arvore)}")
     vistos: set[str] = set()
     for numero, (nome, codigo, explicacao) in enumerate(etapas, 1):
         chave = f"{codigo}:{explicacao}"
         if chave in vistos:
             continue
         vistos.add(chave)
-        print(f"\nPasso {numero}: Regra aplicada: {nome} ({codigo}).")
-        print(f"      {explicacao}")
+        print(f"\nPasso {numero}: {nome} ({codigo})")
+        imprimir_texto_formatado(explicacao)
         try:
-            resposta = input("\nQuer ver a fórmula usada e como aplicar? (S/N)\n> ").strip().casefold()
+            resposta = input(
+                "\nQuer ver a fórmula usada e como aplicar? (S/N)\n> "
+            ).strip().casefold()
         except (EOFError, KeyboardInterrupt):
             resposta = "n"
             print("N")
+        if resposta == "sair":
+            return True
         if resposta in {"s", "sim", "y", "yes"}:
             mostrar_exemplos(codigo)
     resultado_obtido = formatar_resultado(resultado).replace(
         "cos(x²) * (2x)", "2x * cos(x²)"
     )
-    print(f"\nResultado obtido pela aplicação das regras:\n      f'(x) = {resultado_obtido}")
+    print("\nResultado obtido pela aplicação das regras:")
+    imprimir_texto_formatado(f"f'(x) = {resultado_obtido}")
 
     etapas_simplificacao = simplificar_com_etapas(resultado)
     if etapas_simplificacao:
@@ -1480,22 +1818,81 @@ def resolver(
         except (EOFError, KeyboardInterrupt):
             resposta = "n"
             print("N")
+        if resposta == "sair":
+            return True
         if resposta in {"s", "sim", "y", "yes"}:
             anterior = resultado_obtido
             for numero, etapa in enumerate(etapas_simplificacao, 1):
                 atual = formatar_resultado(etapa)
                 print(f"\nSimplificação {numero}:")
-                print(f"      {anterior}")
-                print(f"      = {atual}")
+                imprimir_texto_formatado(anterior)
+                imprimir_texto_formatado(f"= {atual}")
                 anterior = atual
         resultado_final = formatar_resultado(etapas_simplificacao[-1])
     else:
         print("\nA derivada já está na forma simplificada pelo tutor.")
         resultado_final = resultado_obtido
-    print(f"\nResultado final:\n      f'(x) = {resultado_final}")
+    print("\nResultado final:")
+    imprimir_texto_formatado(f"f'(x) = {resultado_final}")
+    return False
+
+
+def mostrar_resolucao_especial(titulo: str, etapas: list[str], resultado: str) -> None:
+    print(f"\n=== {titulo} ===")
+    for numero, etapa in enumerate(etapas, 1):
+        print(f"\nPasso {numero}:")
+        imprimir_texto_formatado(etapa)
+    print("\nResultado final:")
+    imprimir_texto_formatado(resultado)
+
+
+def resolver_implicita(equacao: str) -> None:
+    try:
+        resultado, etapas = preparar_implicita(equacao)
+    except (SyntaxError, ExpressaoInvalida) as erro:
+        print(f"\nNão consegui resolver a equação implícita: {erro}")
+        print("Exemplo aceito: x^2 + y^2 = 1")
+        return
+    mostrar_resolucao_especial("Diferenciação implícita", etapas, f"y' = {resultado}")
+
+
+def resolver_parametrica(entrada: str) -> None:
+    try:
+        resultado, etapas = preparar_parametrica(entrada)
+    except (SyntaxError, ExpressaoInvalida) as erro:
+        print(f"\nNão consegui resolver as equações paramétricas: {erro}")
+        print("Exemplo aceito: x=t^2; y=t^3")
+        return
+    mostrar_resolucao_especial("Equações paramétricas", etapas, f"dy/dx = {resultado}")
+
+
+def resolver_ordem_superior(expressao: str, ordem: int) -> None:
+    try:
+        resultado, etapas = preparar_ordem(expressao, ordem)
+    except (SyntaxError, ExpressaoInvalida) as erro:
+        print(f"\nNão consegui calcular a ordem solicitada: {erro}")
+        return
+    mostrar_resolucao_especial(
+        f"Derivada de ordem {ordem}", etapas, f"f^({ordem})(x) = {resultado}"
+    )
+
+
+def resolver_por_partes(entrada: str) -> None:
+    try:
+        resultados, etapas = preparar_por_partes(entrada)
+    except (SyntaxError, ExpressaoInvalida) as erro:
+        print(f"\nNão consegui resolver a função por partes: {erro}")
+        print("Exemplo aceito: x>0:x; x<0:-x")
+        return
+    mostrar_resolucao_especial(
+        "Função por partes",
+        etapas,
+        "; ".join(f"se {condicao}: {derivada}" for condicao, derivada in resultados),
+    )
 
 
 def interativo() -> None:
+    limpar_tela()
     print("Tutor de derivadas | digite uma função, 'guia', 'bloco 1', 'lista' ou 'sair'.")
     while True:
         try:
@@ -1511,19 +1908,36 @@ def interativo() -> None:
         if comando in {"sair", "exit", "quit"}:
             return
         if comando in {"ajuda", "comandos"}:
+            limpar_tela()
             mostrar_comandos()
             continue
         if comando in {"imagem", "derivada de imagem"}:
             menu_derivada_de_imagem()
             continue
+        if comando.startswith("implicita "):
+            resolver_implicita(entrada.split(" ", 1)[1])
+            continue
+        if comando.startswith("parametrica "):
+            resolver_parametrica(entrada.split(" ", 1)[1])
+            continue
+        ordem = re.match(r"ordem\s+(\d+)\s+(.+)", entrada, re.IGNORECASE)
+        if ordem:
+            resolver_ordem_superior(ordem.group(2), int(ordem.group(1)))
+            continue
+        if comando.startswith("partes "):
+            resolver_por_partes(entrada.split(" ", 1)[1])
+            continue
         if comando == "lista":
+            limpar_tela()
             listar()
             continue
         if comando == "guia":
+            limpar_tela()
             mostrar_guia_algebra()
             continue
         bloco = re.fullmatch(r"bloco\s+(\d{1,2})", comando)
         if bloco:
+            limpar_tela()
             mostrar_guia_algebra(int(bloco.group(1)))
             continue
         if normalizar(entrada) in {"s", "sim", "n", "nao", "não"}:
@@ -1531,6 +1945,7 @@ def interativo() -> None:
             print("As respostas S/N só são usadas depois que uma expressão é aberta.")
             continue
         if any(token in entrada for token in ("(", ")", "^", "*", "/")) and not por_codigo(entrada):
+            limpar_tela()
             resolver(entrada)
             continue
         item = por_codigo(entrada)
@@ -1554,15 +1969,48 @@ def mostrar_comandos() -> None:
 
 
 def menu_inicial() -> None:
+    global MODO_DESENVOLVEDOR
     while True:
+        limpar_tela()
         print("\n=== Tutor de Derivadas ===")
-        print("1. Começar uma derivação")
+        print("1. Tutor completo (derivação, imagem e ordem superior)")
         print("2. Jogo de derivadas")
-        print("3. Ver comandos e exemplos")
-        print("4. Ver lista de regras")
-        print("5. Ver guia de álgebra")
-        print("6. Derivada de imagem (símbolos dependentes de x)")
-        print("7. Sair")
+        print("3. Guia geral (comandos, regras e álgebra)")
+        print("4. Tópicos avançados")
+        print("5. Sair")
+        try:
+            escolha = input("> ").strip()
+        except (EOFError, KeyboardInterrupt):
+            print()
+            return
+        if remover_acentos(escolha) == "desenvolvedor":
+            MODO_DESENVOLVEDOR = not MODO_DESENVOLVEDOR
+            estado = "ativado" if MODO_DESENVOLVEDOR else "desativado"
+            print(f"\nModo desenvolvedor {estado}.")
+            input("Pressione Enter para continuar...")
+            continue
+        if escolha == "1":
+            menu_tutor_completo()
+        elif escolha == "2":
+            menu_jogo()
+        elif escolha == "3":
+            menu_guia_geral()
+        elif escolha == "4":
+            menu_topicos_avancados()
+        elif escolha == "5":
+            return
+        else:
+            print("Escolha uma opção de 1 a 5.")
+
+
+def menu_tutor_completo() -> None:
+    while True:
+        limpar_tela()
+        print("\n=== Tutor completo ===")
+        print("1. Derivação passo a passo")
+        print("2. Derivada de imagem (símbolos dependentes de x)")
+        print("3. Derivada de ordem superior")
+        print("4. Voltar")
         try:
             escolha = input("> ").strip()
         except (EOFError, KeyboardInterrupt):
@@ -1571,22 +2019,96 @@ def menu_inicial() -> None:
         if escolha == "1":
             interativo()
         elif escolha == "2":
-            menu_jogo()
-        elif escolha == "3":
-            mostrar_comandos()
-        elif escolha == "4":
-            listar()
-        elif escolha == "5":
-            mostrar_guia_algebra()
-        elif escolha == "6":
             menu_derivada_de_imagem()
-        elif escolha == "7":
+        elif escolha == "3":
+            try:
+                ordem = int(input("Qual ordem deseja calcular?\n> ").strip())
+                expressao = input("Digite a função:\n> ").strip()
+            except (EOFError, KeyboardInterrupt, ValueError):
+                print("Ordem inválida.")
+                continue
+            if expressao:
+                resolver_ordem_superior(expressao, ordem)
+        elif escolha == "4":
             return
         else:
-            print("Escolha uma opção de 1 a 7.")
+            print("Escolha uma opção de 1 a 4.")
+
+
+def menu_guia_geral() -> None:
+    while True:
+        limpar_tela()
+        print("\n=== Guia geral ===")
+        print("1. Comandos e exemplos")
+        print("2. Lista de regras")
+        print("3. Guia de álgebra")
+        print("4. Voltar")
+        try:
+            escolha = input("> ").strip()
+        except (EOFError, KeyboardInterrupt):
+            print()
+            return
+        if escolha == "1":
+            mostrar_comandos()
+        elif escolha == "2":
+            listar()
+        elif escolha == "3":
+            mostrar_guia_algebra()
+        elif escolha == "4":
+            return
+        else:
+            print("Escolha uma opção de 1 a 4.")
+
+
+def menu_topicos_avancados() -> None:
+    while True:
+        limpar_tela()
+        print("\n=== Tópicos avançados ===")
+        print("1. Diferenciação implícita")
+        print("2. Equações paramétricas")
+        print("3. Valor absoluto e funções por partes")
+        print("4. Voltar")
+        try:
+            escolha = input("> ").strip()
+        except (EOFError, KeyboardInterrupt):
+            print()
+            return
+        if escolha == "1":
+            try:
+                equacao = input("Digite a equação (ex.: x^2 + y^2 = 1):\n> ").strip()
+            except (EOFError, KeyboardInterrupt):
+                print()
+                return
+            if equacao:
+                resolver_implicita(equacao)
+        elif escolha == "2":
+            try:
+                entrada = input("Digite x=...; y=... (ex.: x=t^2; y=t^3):\n> ").strip()
+            except (EOFError, KeyboardInterrupt):
+                print()
+                return
+            if entrada:
+                resolver_parametrica(entrada)
+        elif escolha == "3":
+            try:
+                entrada = input(
+                    "Use abs(x) ou trechos condição:expressão separados por ;:\n> "
+                ).strip()
+            except (EOFError, KeyboardInterrupt):
+                print()
+                return
+            if entrada.startswith("abs("):
+                resolver(entrada)
+            elif entrada:
+                resolver_por_partes(entrada)
+        elif escolha == "4":
+            return
+        else:
+            print("Escolha uma opção de 1 a 4.")
 
 
 def menu_derivada_de_imagem() -> None:
+    limpar_tela()
     print("\n=== Derivada de imagem ===")
     print("Neste modo, símbolos visuais como bola e triângulo dependem de x.")
     print("\nVocê pode escrever de três formas:")
@@ -1619,11 +2141,23 @@ def main() -> int:
     parser.add_argument("--interativo", "-i", action="store_true", help="Abre um modo de consulta.")
     parser.add_argument("--comandos", action="store_true", help="Mostra a sintaxe e exemplos de entrada.")
     parser.add_argument("--jogo", action="store_true", help="Abre o jogo de derivadas.")
+    parser.add_argument("--implicita", metavar="EQUACAO", help="Resolve uma equação por diferenciação implícita.")
+    parser.add_argument("--parametrica", metavar="ENTRADA", help="Resolve x=...; y=... em forma paramétrica.")
+    parser.add_argument("--ordem", type=int, metavar="N", help="Calcula a derivada de ordem N.")
+    parser.add_argument("--partes", metavar="ENTRADA", help="Resolve trechos no formato condição:expressão;...")
     args = parser.parse_args()
 
     try:
         verificar_resumo_derivadas()
-        if args.jogo:
+        if args.implicita:
+            resolver_implicita(args.implicita)
+        elif args.parametrica:
+            resolver_parametrica(args.parametrica)
+        elif args.ordem is not None and args.resolver:
+            resolver_ordem_superior(args.resolver, args.ordem)
+        elif args.partes:
+            resolver_por_partes(args.partes)
+        elif args.jogo:
             menu_jogo()
         elif args.comandos:
             if not COMANDOS.exists():

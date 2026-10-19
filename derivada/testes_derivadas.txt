@@ -399,3 +399,210 @@ Para consultar a sintaxe completa das entradas:
 
     (x^2*exp(sin(x)))/ln(x^3+1)
 
+
+9. NOVA LISTA DE QUESTÕES
+--------------------------
+
+51. Composição trigonométrica com símbolos de imagem:
+
+    csc(sec(cos(sin(voce+seu_amigo))))/2
+
+
+52. Produto de cotangente, cosseno e seno:
+
+    cot(x)*cos(x)*sin(x)*2
+
+
+53. Quociente de potências trigonométricas:
+
+    cos(x^2)^2/sin(x^2)^2
+
+
+54. Exponencial, seno, cosseno e constantes:
+
+    exp(x)*sin(x)+cos(x)+pi+cos(pi)
+
+
+55. Arco-seno de identidade trigonométrica:
+
+    arcsin(cos(x)^2+sin(x)^2)
+
+
+56. Potência e recíproco:
+
+    x^2+1/x^2-1
+
+
+57. Exponencial e quociente trigonométrico:
+
+    exp(x)+csc(x)/cot(x)+2
+
+
+58. Potência com símbolos de imagem:
+
+    ln(guarda_chuva)^gota
+
+
+59. Composição com seno ao quadrado:
+
+    sin(cos(sin(2*x^2)^2))
+
+
+60. Cosseno de secante e constante:
+
+    cos(sec(x^2))+250107
+
+
+61. Raiz cúbica de seno ao quadrado:
+
+    root3(sin(x^2)^2)+x
+
+
+62. Potência com expoente constante:
+
+    sarrada^67
+
+
+63. Arco-tangente com potência de imagem:
+
+    arctan(tan(voce^seu_parceiro)+1)
+
+
+64. Cinco exponenciais aninhadas:
+
+    exp(exp(exp(exp(exp(x^2)))))
+
+
+65. Logaritmo de base 2:
+
+    log2(x^2)
+
+
+66. Potência de base constante e produto:
+
+    80820960702^(x^2)-x*sin(x)
+
+
+67. Potência de quociente:
+
+    (a^(3*x)/B^(3*x^2))^(3*pi)
+
+
+68. Produto de seno e cosseno:
+
+    sin(x)*cos(x)
+
+
+69. Quociente, símbolo de imagem e logaritmo:
+
+    x/x^3*Fusca+ln(x)
+
+
+70. Recíproco de quatro logaritmos aninhados:
+
+    1/ln(ln(ln(ln(exp(2*x)))))
+
+
+71. Composição trigonométrica e constante:
+
+    sin(cos(sqrt(sin(x))))+7273747576^2
+
+
+72. Arco-tangente com potências de imagem:
+
+    arctan(tan(exp(ln(voce^seu_parceiro)))+voce^seu_amigo)+1/x
+
+
+73. Potência aninhada e raízes:
+
+    x^(x^(2*x))+sqrt(sqrt(exp(2*x)))
+
+
+74. Produto de raiz cúbica e soma de composições:
+
+    root3(x)*(sin(x+1/x^3)+cos(root3((x+1)^2)))
+
+
+75. Identidade dentro do arco-tangente:
+
+    arctan(sin(x)+cos(x)/cos(x)-sin(x))*sqrt(2)
+
+
+76. Constantes trigonométricas e composição:
+
+    arctan(sin(3*pi/2)+exp(ln(sin(2026*pi)+tan(sqrt(x)))))
+
+
+77. Potência com base seno e expoente variável:
+
+    sin(x)^(cos(2*x)^sin(3*x))
+
+
+78. Produto de duas potências variáveis:
+
+    sin(x)^cos(2*x)*x^sin(3*x)
+
+
+79. Potência de produto com arco-cosseno:
+
+    (cot(arccos(x))*sqrt(1-x^2))^2
+
+
+80. Tangente ao quadrado e raiz:
+
+    tan(ln(sec(x)) )^2+sqrt(x)
+
+
+81. Soma de potências fracionárias:
+
+    (x^(1/2)*x^(1/3)*x^(1/7)*x^(1/11))+x^(1/13)
+
+
+10. TESTES DAS NOVAS CATEGORIAS IMPLEMENTADAS
+-----------------------------------------------
+
+82. Arco-cotangente:
+
+    arccot(x^2+1)
+
+
+83. Seno hiperbolico inverso:
+
+    asinh(3*x^2)
+
+
+84. Valor absoluto:
+
+    abs(x^2-1)
+
+
+85. Diferenciacao implicita:
+
+    x^2+y^2=1
+
+Use:
+    python guia_derivadas.py --implicita "x^2+y^2=1"
+
+
+86. Equacoes parametricas:
+
+    x=t^2; y=t^3
+
+Use:
+    python guia_derivadas.py --parametrica "x=t^2; y=t^3"
+
+
+87. Segunda derivada:
+
+    x^4
+
+Use:
+    python guia_derivadas.py --ordem 2 --resolver "x^4"
+
+
+88. Funcao por partes:
+
+    x>0:x; x<0:-x
+
+Use:
+    python guia_derivadas.py --partes "x>0:x; x<0:-x"

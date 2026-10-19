@@ -5,6 +5,17 @@ O arquivo `resumo_de_derivadas.txt` é a fonte textual das fórmulas. O script
 regras necessárias, resolve por etapas e pergunta se você quer ver a fórmula
 e exemplos simples e complexos em cada etapa.
 
+O resumo também contém um catálogo ampliado de cálculo diferencial para
+referência e futuras extensões: regras gerais, funções trigonométricas e
+inversas, funções hiperbólicas e inversas, diferenciação implícita e
+paramétrica, derivadas de ordem superior, várias variáveis e algumas funções
+especiais. Estar registrado no resumo não significa que cada função já esteja
+aceita pelo parser.
+
+Para os assuntos que ainda não fazem parte do tutor, há também o arquivo
+`estudos_futuros_calculo.txt`. Ele explica brevemente cada tema e traz dois
+exemplos por função ou categoria, sem colocá-los automaticamente no jogo.
+
 ## Como usar
 
 Abra um terminal nesta pasta e execute:
@@ -21,14 +32,29 @@ python guia_derivadas.py --lista
 python guia_derivadas.py --interativo
 python guia_derivadas.py --comandos
 python guia_derivadas.py --jogo
+python guia_derivadas.py --implicita "x^2+y^2=1"
+python guia_derivadas.py --parametrica "x=t^2; y=t^3"
+python guia_derivadas.py --ordem 2 --resolver "x^4"
+python guia_derivadas.py --partes "x>0:x; x<0:-x"
 ```
 
-Sem argumentos, o programa abre um menu inicial com opções para começar uma
-derivação, ver os comandos, listar regras, abrir o guia de álgebra, entrar no
-modo de derivada de imagem ou sair.
+Sem argumentos, o programa abre um menu inicial compacto. A opção **Tutor
+completo** reúne a derivação passo a passo, a derivada de imagem e as
+derivadas de ordem superior. A opção **Guia geral** reúne comandos, lista de
+regras e guia de álgebra. A opção **Tópicos avançados** reúne diferenciação
+implícita, equações paramétricas, valor absoluto e funções por partes.
 Também é possível usar `--interativo` para entrar diretamente no tutor.
 
-No modo interativo, digite uma função como `sin(x^2)`. O tutor mostrará cada
+No Tutor completo, a derivação comum continua sendo o caminho principal. A
+ordem superior precisa ser escolhida explicitamente porque uma expressão como
+`x^4` não informa se o usuário quer a primeira, segunda ou terceira derivada.
+O modo de imagem também permanece explícito porque, no modo normal, letras
+diferentes de `x` são constantes; assim o programa não pode adivinhar com
+segurança se `M^H` representa constantes ou símbolos dependentes de `x`.
+
+No modo interativo, digite uma função como `sin(x^2)`. A multiplicação
+implícita comum da matemática também é aceita, como `3x^2`, `2sin(x)` e
+`4(x+1)`. O tutor mostrará cada
 passo e perguntará:
 
 ```text
@@ -38,6 +64,32 @@ Quer ver a fórmula usada e como aplicar? (S/N)
 Cada passo mostra primeiro somente a transformação aplicada à expressão. A
 fórmula geral, a explicação e os exemplos da regra aparecem apenas quando a
 resposta for `S`.
+
+As fórmulas, exemplos e resultados são exibidos em blocos separados, com
+recuo e espaçamento entre as seções. Expressões longas são quebradas em mais
+de uma linha sem cortar palavras, para facilitar a leitura no terminal.
+
+Ao resolver uma expressão, o tutor preserva três referências visuais:
+
+1. a equação exatamente como foi digitada;
+2. a forma que o parser interpretou;
+3. qualquer simplificação algébrica feita antes da derivação.
+
+Por exemplo, em `x^2*3x^2`, ele mostra a transformação `x² * 3x² =
+3x⁴` antes de aplicar a regra do produto. Assim, a forma reduzida nunca
+aparece sem explicar de onde veio.
+
+## Limpeza da tela e modo desenvolvedor
+
+No modo normal, o programa limpa a tela somente ao trocar de contexto: ao
+abrir um menu, iniciar uma nova questão ou começar uma nova expressão. A
+conversa do tutor não é apagada enquanto uma expressão está sendo resolvida;
+assim, os passos, fórmulas e resultado permanecem visíveis juntos.
+
+Na tela inicial, digite `desenvolvedor` para alternar o modo desenvolvedor.
+Nesse modo nenhuma limpeza automática é feita, permitindo acompanhar todo o
+histórico do terminal e investigar possíveis erros. Digite `desenvolvedor`
+novamente na tela inicial para desativá-lo.
 
 Depois que todas as regras são aplicadas, o tutor mostra o resultado obtido.
 Se ainda existir uma redução algébrica segura, ele avisa que a expressão pode
@@ -105,10 +157,20 @@ para abrir um bloco específico, um código do resumo (`01.03`), `lista` ou
 `comandos_derivadas.txt` contém a lista completa da sintaxe.
 
 As expressões usadas para testar o tutor estão reunidas em
-`testes_derivadas.txt`. Esse arquivo inclui as 19 questões complexas, testes
-de derivada de imagem, potências com expoentes variáveis, raízes, logaritmos,
-simplificações algébricas e entradas inválidas. Cada teste vem com o comando
-pronto para copiar no terminal.
+`testes_derivadas.txt`. O arquivo contém atualmente 88 entradas numeradas.
+O jogo carrega 84 questões compatíveis com o modo normal, incluindo testes de
+derivada de imagem, potências com expoentes variáveis, raízes, logaritmos,
+simplificações algébricas e as novas funções implementadas. As quatro
+entradas especiais restantes são apenas exemplos de diferenciação implícita,
+paramétrica, ordem superior e funções por partes; elas ficam fora do sorteio e
+devem ser executadas pelos comandos indicados no próprio arquivo.
+
+Além do modo comum, o tutor aceita diferenciação implícita, equações
+paramétricas, derivadas de ordem superior e funções por partes. Esses recursos
+podem ser chamados pelos argumentos mostrados acima ou pelos comandos
+correspondentes no modo interativo. Em equações paramétricas, a variável
+apresentada no resultado é `t`, mesmo que o cálculo interno reutilize o
+derivador principal baseado em `x`.
 
 ## Jogo de derivadas
 
@@ -123,6 +185,10 @@ Também é possível abrir o jogo diretamente com:
 ```text
 python guia_derivadas.py --jogo
 ```
+
+Durante qualquer rodada do jogo, digite `sair` para interromper a questão,
+a resolução ou a pergunta de continuação e retornar diretamente à tela
+principal. No menu do jogo, `sair` também retorna à tela principal.
 
 O jogo lê automaticamente as expressões numeradas de
 `testes_derivadas.txt`. Assim, ao adicionar um novo teste válido ao arquivo,
@@ -207,7 +273,8 @@ seção detalhada.
 
 O resolvedor aceita `x`, números e outras letras constantes, `+`, `-`, `*`,
 `/`, `^`, expoentes racionais constantes e variáveis, `sqrt`, `root3`,
-`root5`, `sin`, `cos`, `tan`, `cot`, `sec`, `csc`, `arctan`, `exp`, `e^...`,
+`root5`, `sin`, `cos`, `tan`, `cot`, `sec`, `csc`, `arctan`, `arcsin`,
+`arccos`, `exp`, `e^...`,
 a constante matemática `e`, `ln` e logaritmos de base constante. Para uma
 base como 3, use `log3(expressão)`:
 
