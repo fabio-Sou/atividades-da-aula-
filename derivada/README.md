@@ -45,17 +45,45 @@ regras e guia de álgebra. A opção **Tópicos avançados** reúne diferenciaç
 implícita, equações paramétricas, valor absoluto e funções por partes.
 Também é possível usar `--interativo` para entrar diretamente no tutor.
 
+## Protótipo de interface gráfica
+
+A interface gráfica é experimental e fica separada do tutor de terminal. Para
+instalar a dependência opcional e abrir a janela:
+
+```text
+python -m pip install -r requirements-gui.txt
+python interface_grafica.py
+```
+
+O protótipo permite digitar uma função e ver as regras, os passos e a
+derivada final em notação matemática renderizada. A renderização é local e
+usa o Matplotlib; não é necessário instalar uma distribuição externa do
+LaTeX. Marque **Modo imagem** para tratar letras além de `x` como funções
+dependentes de `x`, assim como no tutor do terminal. O terminal continua
+disponível executando `python guia_derivadas.py`; a interface gráfica não
+substitui nem altera os menus existentes. Por enquanto, a janela cobre a
+derivação comum de primeira ordem; os modos de jogo e tópicos avançados
+continuam no terminal.
+
 No Tutor completo, a derivação comum continua sendo o caminho principal. A
 ordem superior precisa ser escolhida explicitamente porque uma expressão como
 `x^4` não informa se o usuário quer a primeira, segunda ou terceira derivada.
 O modo de imagem também permanece explícito porque, no modo normal, letras
 diferentes de `x` são constantes; assim o programa não pode adivinhar com
 segurança se `M^H` representa constantes ou símbolos dependentes de `x`.
+Quando uma letra do alfabeto é escrita como função explícita de x, por
+exemplo `f(x)` ou `R(x)`, o tutor a trata como função simbólica e aplica a
+regra do produto ou da cadeia conforme necessário. Uma letra isolada, como
+`f`, ainda representa uma constante no modo normal.
 
 No modo interativo, digite uma função como `sin(x^2)`. A multiplicação
 implícita comum da matemática também é aceita, como `3x^2`, `2sin(x)` e
 `4(x+1)`. O tutor mostrará cada
 passo e perguntará:
+
+Para exponenciais, `exp(u)` é apenas outra notação para `e^u`. O tutor
+converte entradas como `e^(e^(x^2))` para essa forma interna, preservando
+cada exponencial aninhada.
 
 ```text
 Quer ver a fórmula usada e como aplicar? (S/N)
@@ -90,6 +118,11 @@ Na tela inicial, digite `desenvolvedor` para alternar o modo desenvolvedor.
 Nesse modo nenhuma limpeza automática é feita, permitindo acompanhar todo o
 histórico do terminal e investigar possíveis erros. Digite `desenvolvedor`
 novamente na tela inicial para desativá-lo.
+
+As linhas de diagnóstico que mostram a equação digitada, a forma interpretada
+e a forma usada internamente na derivação aparecem somente no modo
+desenvolvedor. Fora dele, o tutor mantém os passos e resultados da resolução
+sem repetir essas informações.
 
 As opções **Derivada de imagem** e **Derivada de ordem superior** do Tutor
 completo mantêm o resultado visível até você pressionar Enter. Para derivada
@@ -179,11 +212,18 @@ derivador principal baseado em `x`.
 
 ## Jogo de derivadas
 
-O menu inicial inclui o **Jogo de derivadas**. Ele possui três modos:
+O menu inicial inclui o **Jogo de derivadas**. Ele possui quatro modos:
 
 1. **Treino**: permite pedir uma dica antes de responder;
 2. **Desafio**: não oferece dica automática e contabiliza as tentativas;
-3. **Tutor**: abre a resolução passo a passo junto com o aluno.
+3. **Tutor**: abre a resolução passo a passo junto com o aluno;
+4. **Múltipla escolha**: permite escolher entre dois tipos de pergunta:
+   selecionar a derivada correta ou identificar, em ordem, cada regra usada,
+   como produto, quociente e cadeia. Na identificação das regras, cada etapa
+   apresenta quatro alternativas e, após a resposta, mostra a regra correta e
+   sua aplicação à expressão. A etapa seguinte repete a última transformação,
+   mantendo visível o ponto em que a resolução parou sem precisar procurar no
+   histórico do terminal.
 
 Também é possível abrir o jogo diretamente com:
 

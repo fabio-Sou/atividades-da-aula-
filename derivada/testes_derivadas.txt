@@ -557,6 +557,11 @@ Para consultar a sintaxe completa das entradas:
 
     (x^(1/2)*x^(1/3)*x^(1/7)*x^(1/11))+x^(1/13)
 
+Resultado esperado, mantendo os expoentes como frações exatas:
+
+    f(x) = x^(493/462) + x^(1/13)
+    f'(x) = 493/462*x^(31/462) + 1/13*x^(-12/13)
+
 
 10. TESTES DAS NOVAS CATEGORIAS IMPLEMENTADAS
 -----------------------------------------------
