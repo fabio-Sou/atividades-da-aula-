@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Hello, World!</title>
+        <link rel="stylesheet" href="css/style.css">
+        <script src="js/scrpt.js" defer></script>
+    </head>
+    
+    <body> 
+        <header class="cabecalho">
+            <h1>Clube de leitura</h1>
+            <nav class="menu">
+                <a href="Sobre.html">Sobre</a>
+                <a href="#livro">Livro do mês</a>
+            </nav>
+        </header>
+
+        <main class="conteudo">
+            <section class="secao">
+                <h2>Sobre o clube</h2>
+                <p>Um espaço para ler e conversar sobre histórias.</p>
+            </section>
+
+            <article id="livro" class="secao">
+                <h2>Livro do mês</h2>
+                <img src="img/livro.jpg" alt="Capa do livro do mês, Dom Casmurro"
+                    width="240" height="320">
+                <p>Leia um capítulo por semana.</p>
+
+                <ul>
+                    <li>Encontros às quartas-feiras</li>
+                    <li>Todos podem participar</li>
+                </ul>
+
+                <p>Leituras concluídas: <span id="leituras-concluidas">0</span></p>
+                
+                <button id="somar" type="button">Concluir leitura</button>
+            </article>
+        </main>
+
+        <footer class="rodape">
+            <p>Clube de leitura &copy; 2024</p>
+        </footer>
+    </body>
+    
+</html>

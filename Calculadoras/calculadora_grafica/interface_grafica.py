@@ -72,9 +72,9 @@ class CalculadoraGrafica:
         ).pack(side="left", padx=(8, 0))
 
         botoes = [
-            ["sin(", "cos(", "tan(", "sqrt("],
+            ["sin(", "cos(", "tan(", "√("],
             ["asin(", "acos(", "atan(", "ln("],
-            ["log(", "abs(", "pi", "e"],
+            ["log(", "abs(", "π", "e"],
             ["(", ")", "^", "÷"],
             ["7", "8", "9", "×"],
             ["4", "5", "6", "−"],

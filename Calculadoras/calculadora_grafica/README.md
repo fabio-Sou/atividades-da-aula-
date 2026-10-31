@@ -5,10 +5,14 @@ Usa somente a biblioteca padrão do Python e não exige instalação de pacotes.
 
 ## Executar
 
-Abra um terminal nesta pasta e rode:
+No Windows, dê dois cliques em `CalculadoraGrafica.exe`. O executável inclui
+o Python e a interface gráfica; não é necessário instalar Python para usar
+essa versão.
+
+Para executar o código-fonte com Python instalado, rode:
 
 ```text
-python interface_grafica.py
+py -3 interface_grafica.py
 ```
 
 ## Recursos

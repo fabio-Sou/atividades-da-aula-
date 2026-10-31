@@ -1,0 +1,439 @@
+\documentclass[14pt]{extarticle}
+\usepackage{amsmath}
+\usepackage[a4paper, margin=1cm]{geometry}
+\usepackage[most]{tcolorbox}
+\usepackage{paracol}
+\tcbset{before skip=0pt,after skip=0pt}
+
+\begin{document}
+\begin{paracol}{2}
+\begin{tcolorbox}[colback=white,colframe=black,boxrule=0.5pt]
+
+ \textbf{1. Guia das principais regras (o “kit básico”)}\
+ \vspace{0,5cm}
+01. Produto: \((uv)' = u'v + uv'\)  
+\vspace{0,3cm}
+
+02. Quociente: \(\left(\frac{u}{v}\right)' = \frac{u'v - uv'}{v^2}\)  
+\vspace{0,3cm}
+
+03. Cadeia: \((f(g(x)))' = f'(g(x)) \cdot g'(x)\)  
+\vspace{0,3cm}
+
+04. Potência (expoente constante): \((u^n)' = n u^{n-1} \cdot u'\)  
+\vspace{0,3cm}
+
+05. Potência (expoente função): \((u^v)' = u^v \cdot \big(v' \ln u + v \cdot \tfrac{u'}{u}\big)\)  
+\vspace{0,3cm}
+
+06. Exponencial: \((e^u)' = e^u \cdot u'\)  
+\vspace{0,3cm}
+
+07. Logaritmo natural: \((\ln u)' = \tfrac{u'}{u}\)  
+\vspace{0,3cm}
+
+\end{tcolorbox}
+\switchcolumn
+\begin{tcolorbox}[colback=white,colframe=black,boxrule=0.5pt]
+
+ \textbf{2. Kit Básico de Derivadas}\
+ \vspace{0,5cm}
+ 
+01. Polinômios - \((x^n)' = n x^{n-1}\)
+ \vspace{0,3cm}
+ 
+02. Produto - \((u \cdot v)' = u'v + uv'\)
+\vspace{0,3cm}
+
+03. Quociente - \(\left(\frac{u}{v}\right)' = \frac{u'v - uv'}{v^2}\)
+\vspace{0,3cm}
+
+04. Regra da Cadeia - \((f(g(x)))' = f'(g(x)) \cdot g'(x)\)
+\vspace{0,3cm}
+
+05. Potência - Expoente constante: \((u^n)' = n u^{n-1} \cdot u'\);
+\vspace{0,3cm}
+
+06. Expoente função: \((u^v)' = u^v \cdot \big(v' \ln u + v \cdot \tfrac{u'}{u}\big)\)
+\vspace{0,3cm}
+
+07. Exponenciais - Base \(e\): \((e^{u})' = e^u \cdot u'\);
+\vspace{0,3cm}
+
+08. Base constante \(a\): \((a^{u})' = a^u \cdot \ln(a) \cdot u'\)
+\vspace{0,3cm}
+
+09. Logaritmos - \((\ln u)' = \tfrac{u'}{u}\); \((\log_a u)' = \tfrac{u'}{u \ln a}\)
+
+\end{tcolorbox}
+\switchcolumn
+\begin{tcolorbox}[colback=white,colframe=black,boxrule=0.5pt]
+
+ \textbf{3. Trigonométricas}\
+\vspace{0,5cm}
+
+01. \((\sin u)' = \cos u \cdot u'\)  
+\vspace{0,3cm}
+
+02. \((\cos u)' = -\sin u \cdot u'\)  
+\vspace{0,3cm}
+
+03. \((\tan u)' = \sec^2 u \cdot u'\)  
+\vspace{0,3cm}
+
+04. \((\cot u)' = -\csc^2 u \cdot u'\)  
+\vspace{0,3cm}
+
+05. \((\sec u)' = \sec u \tan u \cdot u'\) 
+\vspace{0,3cm}
+
+06. \((\csc u)' = -\csc u \cot u \cdot u'\)
+
+\end{tcolorbox}
+\switchcolumn
+\begin{tcolorbox}[colback=white,colframe=black,boxrule=0.5pt]
+
+\textbf{4. Hiperbólicas}\
+\vspace{0,5cm}
+
+01. \((\sinh u)' = \cosh u \cdot u'\) 
+\vspace{0,3cm}
+
+02. \((\cosh u)' = \sinh u \cdot u'\)  
+\vspace{0,3cm}
+
+03. \((\tanh u)' = \text{sech}^2 u \cdot u'\)  
+\vspace{0,3cm}
+
+04. \((\coth u)' = -\text{csch}^2 u \cdot u'\)  
+\vspace{0,3cm}
+
+05. \((\text{sech } u)' = -\text{sech } u \tanh u \cdot u'\)  
+\vspace{0,3cm}
+
+06. \((\text{csch } u)' = -\text{csch } u \coth u \cdot u'\)
+\vspace{0,5cm}
+
+\end{tcolorbox}
+\switchcolumn
+\begin{tcolorbox}[colback=white,colframe=black,boxrule=0.5pt]
+
+\textbf{5. Kit Básico de Derivadas Trigonométricas e Hiperbólicas}\
+\vspace{0,5cm}
+
+\textbf{Funções trigonométricas}\
+\vspace{0,5cm}
+
+01. Seno: \(\sin u\)
+\vspace{0,3cm}
+
+02. Cosseno: \(\cos u\)
+\vspace{0,3cm}
+
+03. Tangente: \(\tan u = \frac{\sin u}{\cos u}\)
+\vspace{0,3cm}
+
+04. Cotangente: \(\cot u = \frac{\cos u}{\sin u}\)
+\vspace{0,3cm}
+
+05. Secante: \(\sec u = \frac{1}{\cos u}\)
+\vspace{0,3cm}
+
+06. Cossecante: \(\csc u = \frac{1}{\sin u}\)
+\vspace{0,3cm}
+
+\end{tcolorbox}
+\switchcolumn
+\begin{tcolorbox}[colback=white,colframe=black,boxrule=0.5pt]
+
+\textbf{6. Derivadas trigonométricas}\
+\vspace{0,5cm}
+
+01. \((\sin u)' = \cos u \cdot u'\)
+\vspace{0,3cm}
+
+02. \((\cos u)' = -\sin u \cdot u'\)
+\vspace{0,3cm}
+
+03. \((\tan u)' = \sec^2 u \cdot u'\)
+\vspace{0,3cm}
+
+04. \((\cot u)' = -\csc^2 u \cdot u'\)
+\vspace{0,3cm}
+
+05. \((\sec u)' = \sec u \cdot \tan u \cdot u'\)
+\vspace{0,3cm}
+
+06. \((\csc u)' = -\csc u \cdot \cot u \cdot u'\)
+\vspace{0,3cm}
+
+\end{tcolorbox}
+\end{paracol}
+\newpage
+\begin{paracol}{2}
+\begin{tcolorbox}[colback=white,colframe=black,boxrule=0.5pt]
+
+\textbf{7. Funções hiperbólicas}\
+\vspace{0,5cm}
+
+01. Seno hiperbólico: \(\sinh u = \frac{e^u - e^{-u}}{2}\)
+\vspace{0,3cm}
+
+02. Cosseno hiperbólico: \(\cosh u = \frac{e^u + e^{-u}}{2}\)
+\vspace{0,3cm}
+
+03. Tangente hiperbólica: \(\tanh u = \frac{\sinh u}{\cosh u}\)
+\vspace{0,3cm}
+
+04. Cotangente hiperbólica: \(\coth u = \frac{\cosh u}{\sinh u}\)
+\vspace{0,3cm}
+
+05. Secante hiperbólica: \(\text{sech } u = \frac{1}{\cosh u}\)
+\vspace{0,3cm}
+
+06. Cossecante hiperbólica: \(\text{csch } u = \frac{1}{\sinh u}\)
+\vspace{0,3cm}
+
+\end{tcolorbox}
+\switchcolumn
+\begin{tcolorbox}[colback=white,colframe=black,boxrule=0.5pt]
+
+\textbf{8. Derivadas hiperbólicas}\
+\vspace{0,5cm}
+
+01. \((\sinh u)' = \cosh u \cdot u'\)
+\vspace{0,3cm}
+
+02. \((\cosh u)' = \sinh u \cdot u'\)
+\vspace{0,3cm}
+
+03. \((\tanh u)' = \text{sech}^2 u \cdot u'\)
+\vspace{0,3cm}
+
+04. \((\coth u)' = -\text{csch}^2 u \cdot u'\)
+\vspace{0,3cm}
+
+05. \((\text{sech } u)' = -\text{sech } u \cdot \tanh u \cdot u'\)
+\vspace{0,3cm}
+
+06. \((\text{csch } u)' = -\text{csch } u \cdot \coth u \cdot u'\)
+\vspace{0,3cm}
+
+\end{tcolorbox}
+\end{paracol}
+
+\begin{center}
+\footnotesize
+\textbf{Guia dos blocos e subseções}\
+\vspace{0,3cm}
+
+\begin{minipage}[t]{0.24\textwidth}
+\begin{tcolorbox}[colback=white,colframe=black,boxrule=0.5pt]
+\textbf{Bloco 1 -- Guia das principais regras}\
+\vspace{0,3cm}
+
+01.01 Produto
+\vspace{0,1cm}
+
+01.02 Quociente
+\vspace{0,1cm}
+
+01.03 Regra da cadeia
+\vspace{0,1cm}
+
+01.04 Potência (expoente constante)
+\vspace{0,1cm}
+
+01.05 Potência (expoente função)
+\vspace{0,1cm}
+
+01.06 Exponencial (base \(e\))
+\vspace{0,1cm}
+
+01.07 Logaritmo natural
+\vspace{0,1cm}
+\end{tcolorbox}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.24\textwidth}
+\begin{tcolorbox}[colback=white,colframe=black,boxrule=0.5pt]
+\textbf{Bloco 2 -- Kit Básico de Derivadas}\
+\vspace{0,3cm}
+
+02.01 Polinômios
+\vspace{0,1cm}
+
+02.02 Produto
+\vspace{0,1cm}
+
+02.03 Quociente
+\vspace{0,1cm}
+
+02.04 Regra da cadeia
+\vspace{0,1cm}
+
+02.05 Potência (expoente constante)
+\vspace{0,1cm}
+
+02.06 Potência (expoente função)
+\vspace{0,1cm}
+
+02.07 Exponenciais (base \(e\))
+\vspace{0,1cm}
+
+02.08 Exponenciais (base \(a\))
+\vspace{0,1cm}
+
+02.09 Logaritmos
+\vspace{0,1cm}
+\end{tcolorbox}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.24\textwidth}
+\begin{tcolorbox}[colback=white,colframe=black,boxrule=0.5pt]
+\textbf{Bloco 3 -- Derivadas trigonométricas}\
+\vspace{0,3cm}
+
+03.01 Seno
+\vspace{0,1cm}
+
+03.02 Cosseno
+\vspace{0,1cm}
+
+03.03 Tangente
+\vspace{0,1cm}
+
+03.04 Cotangente
+\vspace{0,1cm}
+
+03.05 Secante
+\vspace{0,1cm}
+
+03.06 Cossecante
+\vspace{0,1cm}
+\end{tcolorbox}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.24\textwidth}
+\begin{tcolorbox}[colback=white,colframe=black,boxrule=0.5pt]
+\textbf{Bloco 4 -- Derivadas hiperbólicas}\
+\vspace{0,1cm}
+
+04.01 Seno hiperbólico (\(\sinh\))
+\vspace{0,1cm}
+
+04.02 Cosseno hiperbólico (\(\cosh\))
+\vspace{0,1cm}
+
+04.03 Tangente hiperbólica (\(\tanh\))
+\vspace{0,1cm}
+
+04.04 Cotangente hiperbólica (\(\coth\))
+\vspace{0,1cm}
+
+04.05 Secante hiperbólica (\(\text{sech}\))
+\vspace{0,1cm}
+
+04.06 Cossecante hiperbólica (\(\text{csch}\))
+\vspace{0,1cm}
+\end{tcolorbox}
+\end{minipage}
+
+\vspace{0,2cm}
+
+\begin{minipage}[t]{0.24\textwidth}
+\begin{tcolorbox}[colback=white,colframe=black,boxrule=0.5pt]
+\textbf{Bloco 5 -- Kit Básico Trigonométricas e Hiperbólicas}\
+\vspace{0,3cm}
+
+05.01 Seno
+\vspace{0,1cm}
+
+05.02 Cosseno
+\vspace{0,1cm}
+
+05.03 Tangente
+\vspace{0,1cm}
+
+05.04 Cotangente
+\vspace{0,1cm}
+
+05.05 Secante
+\vspace{0,1cm}
+
+05.06 Cossecante
+\vspace{0,1cm}
+\end{tcolorbox}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.24\textwidth}
+\begin{tcolorbox}[colback=white,colframe=black,boxrule=0.5pt]
+\textbf{Bloco 6 -- Derivadas trigonométricas (repetição organizada)}\
+\vspace{0,3cm}
+
+06.01 Seno
+\vspace{0,1cm}
+
+06.02 Cosseno
+\vspace{0,1cm}
+
+06.03 Tangente
+\vspace{0,1cm}
+
+06.04 Cotangente
+\vspace{0,1cm}
+
+06.05 Secante
+\vspace{0,1cm}
+
+06.06 Cossecante
+\vspace{0,1cm}
+\end{tcolorbox}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.24\textwidth}
+\begin{tcolorbox}[colback=white,colframe=black,boxrule=0.5pt]
+\textbf{Bloco 7 -- Funções hiperbólicas (definições)}\
+\vspace{0,3cm}
+
+07.01 Seno hiperbólico
+\vspace{0,1cm}
+
+07.02 Cosseno hiperbólico
+\vspace{0,1cm}
+
+07.03 Tangente hiperbólica
+\vspace{0,1cm}
+
+07.04 Cotangente hiperbólica
+\vspace{0,1cm}
+
+07.05 Secante hiperbólica
+\vspace{0,1cm}
+
+07.06 Cossecante hiperbólica
+\vspace{0,1cm}
+\end{tcolorbox}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.24\textwidth}
+\begin{tcolorbox}[colback=white,colframe=black,boxrule=0.5pt]
+\textbf{Bloco 8 -- Derivadas hiperbólicas}\
+\vspace{0,3cm}
+
+08.01 Seno hiperbólico
+\vspace{0,1cm}
+
+08.02 Cosseno hiperbólico
+\vspace{0,1cm}
+
+08.03 Tangente hiperbólica
+\vspace{0,1cm}
+
+08.04 Cotangente hiperbólica
+\vspace{0,1cm}
+
+08.05 Secante hiperbólica
+\vspace{0,1cm}
+
+08.06 Cossecante hiperbólica
+\vspace{0,1cm}
+\end{tcolorbox}
+\end{minipage}
+\end{center}
+
+\end{document}
